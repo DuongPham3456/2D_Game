@@ -3,7 +3,15 @@ using UnityEngine;
 
 public class PlayerManager : CharacterManager
 {
-    // Chia nhỏ các thành phần
+    // --- KHU VỰC THÊM MỚI CHO MECHANIC PHA CÀ PHÊ ---
+    public enum HandState { Empty, HasEmptyCup, HasCoffeeCup }
+    
+    [Header("Coffee Mechanic States")]
+    public HandState myHand = HandState.Empty;
+    public int gold = 0;
+    // ------------------------------------------------
+
+    // Chia nhỏ các thành phần
     [Header("Player")]
     [SerializeField] PlayerLocomotionManager _playerLocomotionManager;
     //[SerializeField] PlayerEquipmentManager _playerEquipmentManager;
@@ -46,7 +54,5 @@ public class PlayerManager : CharacterManager
     //    _playerEquipmentManager.RotateGun(lookAngle);
     //}
 
-    // bây giờ sẽ làm kế thừa để cho cả enemies cx dùng đc hàm Handle Damage
-
-
+    // bây giờ sẽ làm kế thừa để cho cả enemies cx dùng đc hàm Handle Damage
 }
