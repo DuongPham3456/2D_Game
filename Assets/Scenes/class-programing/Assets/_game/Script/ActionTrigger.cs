@@ -1,56 +1,64 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 
 public class ActionTrigger : MonoBehaviour
 {
-    [Header("Kéo thả hàm vào đây")]
+    public enum StationType { Study, Work, Rest, Custom }
+
+    [Header("Station")]
+    public StationType stationType = StationType.Custom;
+    public string promptMessage = "Press E to interact";
+
+    [Header("Events")]
     public UnityEvent onInteract;
 
-    private bool isPlayerInRange = false;
+    [Header("Optional UI")]
+    public TextMeshProUGUI promptText;
 
-    void Start()
-    {
-        // Kiểm tra xem script có đang chạy không
-        Debug.Log("🚀 Trạm [" + gameObject.name + "] đã khởi động thành công!");
-    }
+    bool isPlayerInRange;
 
     void Update()
     {
-        // MỖI KHI BẠN BẤM E, DÒNG NÀY PHẢI HIỆN RA (Dù đứng ở đâu)
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Debug.Log("⌨️ Phím E vừa được bấm!");
-            
-            if (isPlayerInRange)
-            {
-                Debug.Log("✅ Đang đứng đúng vị trí. Kích hoạt sự kiện ngay!");
-                onInteract.Invoke();
-            }
-            else
-            {
-                Debug.Log("❌ Bạn bấm E, nhưng Unity nghĩ bạn CHƯA ĐỨNG VÀO TRONG TRẠM.");
-            }
-        }
+        if (Input.GetKeyDown(KeyCode.E) && isPlayerInRange)
+            onInteract.Invoke();
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        // MỖI KHI CÓ VẬT CHẠM VÀO TRẠM (kể cả không phải Player), DÒNG NÀY SẼ HIỆN
-        Debug.Log("💥 Va chạm! Có một vật tên là [" + other.gameObject.name + "] vừa bước vào. Tag của nó là: " + other.gameObject.tag);
+        if (!other.CompareTag("Player")) return;
 
-        if (other.CompareTag("Player"))
-        {
-            isPlayerInRange = true;
-            Debug.Log("🎯 Chuẩn Player rồi. Sẵn sàng bấm E.");
-        }
+        isPlayerInRange = true;
+        ShowPrompt(true);
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (!other.CompareTag("Player")) return;
+
+        isPlayerInRange = false;
+        ShowPrompt(false);
+    }
+
+    void ShowPrompt(bool visible)
+    {
+        if (promptText == null) return;
+
+        if (visible)
         {
-            isPlayerInRange = false;
-            Debug.Log("🚶 Player đã đi ra ngoài.");
+            string label = stationType switch
+            {
+                StationType.Study => "Press E to Study",
+                StationType.Work => "Press E to Work at Cafe",
+                StationType.Rest => "Press E to Rest",
+                _ => promptMessage
+            };
+            promptText.text = label;
+            promptText.gameObject.SetActive(true);
+        }
+        else
+        {
+            promptText.gameObject.SetActive(false);
         }
     }
 }
