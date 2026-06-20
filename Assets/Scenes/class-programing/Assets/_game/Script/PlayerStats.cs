@@ -6,12 +6,12 @@ public class PlayerStats : MonoBehaviour
     [Header("Config (optional ScriptableObject)")]
     [SerializeField] StudentGameConfig config;
 
-    [Header("Stats — modify in Play Mode or Inspector")]
+    [Header("Stats")]
     [SerializeField] float gpa = 2.0f;
-    [SerializeField] int money = 5_000_000;
+    [SerializeField] int money = 5000000;
     [SerializeField] float stamina = 100f;
     [SerializeField] float maxStamina = 100f;
-    [SerializeField] int totalDebt = 30_000_000;
+    [SerializeField] int totalDebt = 30000000;
     [SerializeField] float maxGpa = 4.0f;
 
     [Header("Study Parameters")]
@@ -20,8 +20,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] float studyHours = 2f;
 
     [Header("Work at Cafe Parameters")]
-    [SerializeField] float workStaminaCost = 30f;
-    [SerializeField] int workMoneyGain = 500_000;
+    [SerializeField] float workStaminaCost = 5f;
+    [SerializeField] int workMoneyGain = 500000;
     [SerializeField] float workHours = 4f;
 
     [Header("Rest Parameters")]
@@ -30,7 +30,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] bool restSetsStaminaToMax = true;
 
     [Header("Daily Living Cost")]
-    [SerializeField] int dailyLivingCost = 50_000;
+    [SerializeField] int dailyLivingCost = 50000;
 
     [Header("References")]
     [SerializeField] TimeManager timeManager;
@@ -42,19 +42,19 @@ public class PlayerStats : MonoBehaviour
     public TextMeshProUGUI debtText;
     public TextMeshProUGUI messageText;
 
-    void Awake()
+    private void Awake()
     {
         if (timeManager == null)
             timeManager = FindFirstObjectByType<TimeManager>();
     }
 
-    void Start()
+    private void Start()
     {
         ApplyConfigIfPresent();
         UpdateUI();
     }
 
-    void ApplyConfigIfPresent()
+    private void ApplyConfigIfPresent()
     {
         if (config == null) return;
 
@@ -80,27 +80,58 @@ public class PlayerStats : MonoBehaviour
         dailyLivingCost = config.dailyLivingCost;
     }
 
+    // ==========================
+    // GIAO HÀNG CAFE
+    // ==========================
+    public bool DeliverCoffee(int earnings)
+    {
+        if (!HasStamina(workStaminaCost, "giao hàng"))
+            return false;
+
+        stamina -= workStaminaCost;
+        money += earnings;
+
+        AdvanceTime(workHours);
+
+        ShowMessage(
+            $"Giao hàng thành công! +{earnings:N0} VND | Thể lực -{workStaminaCost:F0}"
+        );
+
+        UpdateUI();
+        return true;
+    }
+
     public void Study()
     {
-        if (!HasStamina(studyStaminaCost, "study"))
+        if (!HasStamina(studyStaminaCost, "học"))
             return;
 
         stamina -= studyStaminaCost;
         gpa = Mathf.Min(maxGpa, gpa + studyGpaGain);
+
         AdvanceTime(studyHours);
-        ShowMessage($"Studied at HUST library. GPA +{studyGpaGain:F1}");
+
+        ShowMessage(
+            $"Đã học ở thư viện HUST. GPA +{studyGpaGain:F1}"
+        );
+
         UpdateUI();
     }
 
     public void Work()
     {
-        if (!HasStamina(workStaminaCost, "work a cafe shift"))
+        if (!HasStamina(workStaminaCost, "làm ca quán café"))
             return;
 
         stamina -= workStaminaCost;
         money += workMoneyGain;
+
         AdvanceTime(workHours);
-        ShowMessage($"Cafe shift done. +{workMoneyGain:N0} VND");
+
+        ShowMessage(
+            $"Ca làm xong. +{workMoneyGain:N0} VND"
+        );
+
         UpdateUI();
     }
 
@@ -114,10 +145,17 @@ public class PlayerStats : MonoBehaviour
         if (restSetsStaminaToMax)
             stamina = maxStamina;
         else
-            stamina = Mathf.Min(maxStamina, stamina + restStaminaRestore);
+            stamina = Mathf.Min(
+                maxStamina,
+                stamina + restStaminaRestore
+            );
 
         AdvanceTime(restHours);
-        ShowMessage("Rested at the dorm. Stamina restored.");
+
+        ShowMessage(
+            "Đã nghỉ ngơi ở ký túc xá. Thể lực đã được hồi phục."
+        );
+
         UpdateUI();
     }
 
@@ -125,58 +163,91 @@ public class PlayerStats : MonoBehaviour
     {
         if (money < amount)
         {
-            ShowMessage("Not enough money to pay tuition.");
+            ShowMessage("Không đủ tiền đóng học phí.");
             return;
         }
 
         money -= amount;
         totalDebt = Mathf.Max(0, totalDebt - amount);
-        ShowMessage($"Paid {amount:N0} VND toward tuition debt.");
+
+        ShowMessage(
+            $"Đã đóng {amount:N0} VND học phí."
+        );
+
         UpdateUI();
 
         if (totalDebt <= 0)
-            ShowMessage("You cleared your debt! HUST graduation unlocked!");
+        {
+            ShowMessage(
+                "Đã trả hết nợ! Mở khóa tốt nghiệp HUST!"
+            );
+        }
     }
 
     public void OnNewDay()
     {
-        if (dailyLivingCost <= 0) return;
+        if (dailyLivingCost <= 0)
+            return;
 
         money -= dailyLivingCost;
-        ShowMessage($"Daily expenses: -{dailyLivingCost:N0} VND");
+
+        ShowMessage(
+            $"Chi phí sinh hoạt hàng ngày: -{dailyLivingCost:N0} VND"
+        );
+
         UpdateUI();
 
         if (money < 0)
-            ShowMessage("Warning: You are broke! Work at the cafe or study for scholarships.");
+        {
+            ShowMessage(
+                "Cảnh báo: Bạn đang hết tiền! Hãy đi làm hoặc học bổng."
+            );
+        }
     }
 
-    bool HasStamina(float cost, string actionName)
+    private bool HasStamina(
+        float cost,
+        string actionName)
     {
-        if (stamina >= cost) return true;
+        if (stamina >= cost)
+            return true;
 
-        ShowMessage($"Too tired to {actionName}. Need {cost:F0} stamina (have {stamina:F0}). Rest first!");
+        ShowMessage(
+            $"Quá mệt để {actionName}. Cần {cost:F0} thể lực (hiện có {stamina:F0}). Hãy nghỉ ngơi!"
+        );
+
         return false;
     }
 
-    void AdvanceTime(float hours)
+    private void AdvanceTime(float hours)
     {
         if (timeManager != null)
             timeManager.SkipTime(hours);
     }
 
-    void ShowMessage(string message)
+    private void ShowMessage(string message)
     {
         Debug.Log("[HUST Student] " + message);
+
         if (messageText != null)
             messageText.text = message;
     }
 
     public void UpdateUI()
     {
-        if (gpaText != null) gpaText.text = $"GPA: {gpa:F1} / {maxGpa:F1}";
-        if (moneyText != null) moneyText.text = $"Money: {money:N0} VND";
-        if (staminaText != null) staminaText.text = $"Stamina: {stamina:F0} / {maxStamina:F0}";
-        if (debtText != null) debtText.text = $"Tuition Debt: {totalDebt:N0} VND";
+        if (gpaText != null)
+            gpaText.text = $"GPA: {gpa:F1} / {maxGpa:F1}";
+
+        if (moneyText != null)
+            moneyText.text = $"Tiền: {money:N0} VND";
+
+        if (staminaText != null)
+            staminaText.text =
+                $"Thể lực: {stamina:F0} / {maxStamina:F0}";
+
+        if (debtText != null)
+            debtText.text =
+                $"Học phí còn lại: {totalDebt:N0} VND";
     }
 
     public float Gpa => gpa;

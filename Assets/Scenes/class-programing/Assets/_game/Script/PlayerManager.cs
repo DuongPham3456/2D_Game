@@ -3,6 +3,11 @@ using UnityEngine;
 
 public class PlayerManager : CharacterManager
 {
+    public enum HandState { Empty, HasEmptyCup, HasCoffeeCup }
+    
+    [Header("Coffee Mechanic States")]
+    public HandState myHand = HandState.Empty;
+    
     // Chia nhỏ các thành phần
     [Header("Player")]
     [SerializeField] PlayerLocomotionManager _playerLocomotionManager;
