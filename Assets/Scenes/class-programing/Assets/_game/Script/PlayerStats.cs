@@ -42,6 +42,8 @@ public class PlayerStats : MonoBehaviour
     public TextMeshProUGUI debtText;
     public TextMeshProUGUI messageText;
 
+    string _shownGpa, _shownMoney, _shownStamina, _shownDebt;
+
     void Awake()
     {
         if (timeManager == null)
@@ -87,7 +89,7 @@ public class PlayerStats : MonoBehaviour
 
         stamina -= studyStaminaCost;
         gpa = Mathf.Min(maxGpa, gpa + studyGpaGain);
-        AdvanceTime(studyHours);
+        timeManager?.AdvanceSlot();
         ShowMessage($"Studied at HUST library. GPA +{studyGpaGain:F1}");
         UpdateUI();
     }
@@ -99,7 +101,7 @@ public class PlayerStats : MonoBehaviour
 
         stamina -= workStaminaCost;
         money += workMoneyGain;
-        AdvanceTime(workHours);
+        timeManager?.AdvanceSlot();
         ShowMessage($"Cafe shift done. +{workMoneyGain:N0} VND");
         UpdateUI();
     }
@@ -116,7 +118,11 @@ public class PlayerStats : MonoBehaviour
         else
             stamina = Mathf.Min(maxStamina, stamina + restStaminaRestore);
 
-        AdvanceTime(restHours);
+        if (timeManager != null && timeManager.CurrentSlot == DaySlot.Evening)
+            timeManager.EndDay();
+        else
+            timeManager?.AdvanceSlot();
+
         ShowMessage("Rested at the dorm. Stamina restored.");
         UpdateUI();
     }
@@ -158,12 +164,6 @@ public class PlayerStats : MonoBehaviour
         return false;
     }
 
-    void AdvanceTime(float hours)
-    {
-        if (timeManager != null)
-            timeManager.SkipTime(hours);
-    }
-
     void ShowMessage(string message)
     {
         Debug.Log("[HUST Student] " + message);
@@ -173,10 +173,19 @@ public class PlayerStats : MonoBehaviour
 
     public void UpdateUI()
     {
-        if (gpaText != null) gpaText.text = $"GPA: {gpa:F1} / {maxGpa:F1}";
-        if (moneyText != null) moneyText.text = $"Money: {money:N0} VND";
-        if (staminaText != null) staminaText.text = $"Stamina: {stamina:F0} / {maxStamina:F0}";
-        if (debtText != null) debtText.text = $"Tuition Debt: {totalDebt:N0} VND";
+        SetText(gpaText, ref _shownGpa, $"GPA: {gpa:F1} / {maxGpa:F1}");
+        SetText(moneyText, ref _shownMoney, $"Money: {money:N0} VND");
+        SetText(staminaText, ref _shownStamina, $"Stamina: {stamina:F0} / {maxStamina:F0}");
+        SetText(debtText, ref _shownDebt, $"Tuition Debt: {totalDebt:N0} VND");
+    }
+
+    void SetText(TextMeshProUGUI field, ref string cache, string value)
+    {
+        if (field != null && value != cache)
+        {
+            field.text = value;
+            cache = value;
+        }
     }
 
     public float Gpa => gpa;
