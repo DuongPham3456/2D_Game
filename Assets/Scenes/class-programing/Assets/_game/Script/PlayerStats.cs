@@ -17,16 +17,13 @@ public class PlayerStats : MonoBehaviour
     [Header("Study Parameters")]
     [SerializeField] float studyStaminaCost = 20f;
     [SerializeField] float studyGpaGain = 0.1f;
-    [SerializeField] float studyHours = 2f;
 
     [Header("Work at Cafe Parameters")]
     [SerializeField] float workStaminaCost = 30f;
     [SerializeField] int workMoneyGain = 500_000;
-    [SerializeField] float workHours = 4f;
 
     [Header("Rest Parameters")]
     [SerializeField] float restStaminaRestore = 100f;
-    [SerializeField] float restHours = 8f;
     [SerializeField] bool restSetsStaminaToMax = true;
 
     [Header("Daily Living Cost")]
@@ -69,14 +66,11 @@ public class PlayerStats : MonoBehaviour
 
         studyStaminaCost = config.studyStaminaCost;
         studyGpaGain = config.studyGpaGain;
-        studyHours = config.studyHours;
 
         workStaminaCost = config.workStaminaCost;
         workMoneyGain = config.workMoneyGain;
-        workHours = config.workHours;
 
         restStaminaRestore = config.restStaminaRestore;
-        restHours = config.restHours;
         restSetsStaminaToMax = config.restSetsStaminaToMax;
 
         dailyLivingCost = config.dailyLivingCost;
@@ -118,12 +112,13 @@ public class PlayerStats : MonoBehaviour
         else
             stamina = Mathf.Min(maxStamina, stamina + restStaminaRestore);
 
+        ShowMessage("Rested at the dorm. Stamina restored.");
+
         if (timeManager != null && timeManager.CurrentSlot == DaySlot.Evening)
             timeManager.EndDay();
         else
             timeManager?.AdvanceSlot();
 
-        ShowMessage("Rested at the dorm. Stamina restored.");
         UpdateUI();
     }
 
