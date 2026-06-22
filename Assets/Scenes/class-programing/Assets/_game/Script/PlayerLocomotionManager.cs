@@ -4,10 +4,15 @@ using UnityEngine;
 public class PlayerLocomotionManager : MonoBehaviour
 {
     [SerializeField] Transform playerTransform;
+    [SerializeField] Rigidbody2D rb;
 
     public void Awake()
     {
         if (playerTransform == null) playerTransform = GetComponent<Transform>();
+        // Cache the Rigidbody2D. Moving a dynamic body by writing transform
+        // directly forces the physics engine to re-sync colliders every step,
+        // which tanks the frame rate. We move through the body instead.
+        if (rb == null) rb = GetComponent<Rigidbody2D>();
     }
 
     public void FixedUpdate()
@@ -26,7 +31,13 @@ public class PlayerLocomotionManager : MonoBehaviour
         {
             return;
         }
-        playerTransform.localPosition += new Vector3(horizontalInput, verticalInput, 0) * speed * Time.fixedDeltaTime;
+
+        Vector2 delta = new Vector2(horizontalInput, verticalInput) * speed * Time.fixedDeltaTime;
+
+        if (rb != null)
+            rb.MovePosition(rb.position + delta);
+        else
+            playerTransform.localPosition += (Vector3)delta;
     }
 
 
@@ -49,7 +60,11 @@ public class PlayerLocomotionManager : MonoBehaviour
             Vector2 dir = new Vector2(horizontalInput, verticalInput);
             while (dodgeDuration > 0)
             {
-                playerTransform.localPosition += new Vector3(dir.x, dir.y, 0) * dodgeSpeed * Time.fixedDeltaTime;
+                Vector2 dodgeDelta = dir * dodgeSpeed * Time.fixedDeltaTime;
+                if (rb != null)
+                    rb.MovePosition(rb.position + dodgeDelta);
+                else
+                    playerTransform.localPosition += (Vector3)dodgeDelta;
                 dodgeDuration -= Time.fixedDeltaTime;
                 yield return new WaitForFixedUpdate();
             }
