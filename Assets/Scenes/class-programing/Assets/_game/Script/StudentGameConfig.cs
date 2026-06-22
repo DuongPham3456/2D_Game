@@ -4,29 +4,38 @@ using UnityEngine;
 public class StudentGameConfig : ScriptableObject
 {
     [Header("Starting Stats")]
-    public float startingGpa = 2.0f;
     public int startingMoney = 5_000_000;
-    public float startingStamina = 100f;
-    public float maxStamina = 100f;
     public int startingDebt = 30_000_000;
-    public float maxGpa = 4.0f;
+    public float startingEnergy = 100f;
+    public float maxEnergy = 100f;
+    public float startingSanity = 100f;
+    public float maxSanity = 100f;
+    public float startingKnowledge = 0f;
+    public float maxKnowledge = 200f;
 
-    [Header("Study (Library)")]
-    public float studyStaminaCost = 20f;
-    public float studyGpaGain = 0.1f;
-    public float studyHours = 2f;
+    [Header("Classroom Study")]
+    public float classStudyEnergyCost = 15f;
+    public float classStudySanityCost = 10f;
+    public float classStudyKnowledgeGain = 12f;
 
-    [Header("Work (Cafe)")]
-    public float workStaminaCost = 30f;
+    [Header("Work (Cafe) — flat pay until mini-game ships")]
+    public float workEnergyCost = 20f;
+    public float workSanityCost = 8f;
     public int workMoneyGain = 500_000;
-    public float workHours = 4f;
 
-    [Header("Rest (Dorm)")]
-    public float restStaminaRestore = 100f;
-    public float restHours = 8f;
-    public bool restSetsStaminaToMax = true;
+    [Header("PC Study (Bedroom)")]
+    public float pcStudyEnergyCost = 10f;
+    public float pcStudySanityCost = 5f;
+    public float pcStudyKnowledgeGain = 6f;
+
+    [Header("Entertain (Bedroom)")]
+    public float entertainEnergyCost = 2f;
+    public float entertainSanityGain = 15f;
+
+    [Header("Sleep (partial restore)")]
+    public float sleepEnergyRestore = 40f;
+    public float sleepSanityRestore = 10f;
 
     [Header("Daily Living Cost")]
     public int dailyLivingCost = 50_000;
-    public bool chargeLivingCostAtEndOfDay = true;
 }
