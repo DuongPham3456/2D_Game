@@ -8,12 +8,16 @@ public class TimeManager : MonoBehaviour
     [Header("Time")]
     public int day = 1;
 
+    [Header("Semester")]
+    public int semesterDays = 10;
+
     [Header("UI")]
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI dayText;
 
     [Header("References")]
     [SerializeField] PlayerStats playerStats;
+    [SerializeField] EndingManager endingManager;
 
     public DaySlot CurrentSlot { get; private set; } = DaySlot.Morning;
 
@@ -24,6 +28,8 @@ public class TimeManager : MonoBehaviour
     {
         if (playerStats == null)
             playerStats = FindFirstObjectByType<PlayerStats>();
+        if (endingManager == null)
+            endingManager = FindFirstObjectByType<EndingManager>();
     }
 
     void Start()
@@ -37,12 +43,19 @@ public class TimeManager : MonoBehaviour
             CurrentSlot = DaySlot.Afternoon;
         else if (CurrentSlot == DaySlot.Afternoon)
             CurrentSlot = DaySlot.Evening;
-        // Evening: intentional no-op — player stays until they Rest
+        // Evening: intentional no-op — player stays until they Sleep
         UpdateUI();
     }
 
     public void EndDay()
     {
+        // Sleeping on the final day ends the semester instead of starting a new day.
+        if (day >= semesterDays)
+        {
+            endingManager?.ShowEnding();
+            return;
+        }
+
         CurrentSlot = DaySlot.Morning;
         day++;
         playerStats?.OnNewDay();
