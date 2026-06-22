@@ -42,7 +42,8 @@ at the end of the game (see Endings).
 
 - The slot system (Morning → Afternoon → Evening) is retained from the existing
   `TimeManager`. Each activity consumes a slot per the existing rules.
-- The semester has a **fixed length** of `semesterDays` days (placeholder: 30).
+- The semester has a **fixed length** of `semesterDays` days (placeholder: 10 — a
+  deliberately short run).
 - **Sleep** ends the current day. When the day counter passes `semesterDays`, the
   game ends and the ending is evaluated.
 
@@ -89,17 +90,18 @@ hits 0 and cleared after the next action is burned.
 
 Evaluated once, when the semester ends.
 
-**Knowledge → GPA** (linear, GPA = round(Knowledge / 200 × 4.0, 1)):
+**Knowledge → Class.** The named class is set by Knowledge thresholds; the
+displayed final GPA is linear flavor, `round(Knowledge / 200 × 4.0, 1)`.
 
-| Knowledge | GPA | Class |
+| Knowledge | Class | ~GPA shown |
 |---|---|---|
-| 0–49 | < 2.0 | fail |
-| 50–99 | 2.0–2.9 | average |
-| 100–149 | 3.0–3.5 | good |
-| 150–200 | 3.6–4.0 | excellent |
+| 0–69 | fail | < 1.4 |
+| 70–129 | average | 1.4–2.5 |
+| 130–179 | good | 2.6–3.5 |
+| 180–200 | excellent | 3.6–4.0 |
 
-**Ending = GPA bracket × Debt status** (high GPA = GPA ≥ 3.0; debt cleared =
-`totalDebt <= 0`):
+**Ending = Class × Debt status** (the **High GPA** ending row = **excellent**,
+i.e. Knowledge ≥ 180; debt cleared = `totalDebt <= 0`):
 
 | | Debt cleared | Debt remaining |
 |---|---|---|
