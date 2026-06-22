@@ -6,25 +6,38 @@ public class PlayerStats : MonoBehaviour
     [Header("Config (optional ScriptableObject)")]
     [SerializeField] StudentGameConfig config;
 
-    [Header("Stats — modify in Play Mode or Inspector")]
-    [SerializeField] float gpa = 2.0f;
+    [Header("Stats")]
     [SerializeField] int money = 5_000_000;
-    [SerializeField] float stamina = 100f;
-    [SerializeField] float maxStamina = 100f;
     [SerializeField] int totalDebt = 30_000_000;
-    [SerializeField] float maxGpa = 4.0f;
+    [SerializeField] float energy = 100f;
+    [SerializeField] float maxEnergy = 100f;
+    [SerializeField] float sanity = 100f;
+    [SerializeField] float maxSanity = 100f;
+    [SerializeField] float knowledge = 0f;
+    [SerializeField] float maxKnowledge = 200f;
 
-    [Header("Study Parameters")]
-    [SerializeField] float studyStaminaCost = 20f;
-    [SerializeField] float studyGpaGain = 0.1f;
+    [Header("Classroom Study")]
+    [SerializeField] float classStudyEnergyCost = 15f;
+    [SerializeField] float classStudySanityCost = 10f;
+    [SerializeField] float classStudyKnowledgeGain = 12f;
 
-    [Header("Work at Cafe Parameters")]
-    [SerializeField] float workStaminaCost = 30f;
+    [Header("Work (Cafe)")]
+    [SerializeField] float workEnergyCost = 20f;
+    [SerializeField] float workSanityCost = 8f;
     [SerializeField] int workMoneyGain = 500_000;
 
-    [Header("Rest Parameters")]
-    [SerializeField] float restStaminaRestore = 100f;
-    [SerializeField] bool restSetsStaminaToMax = true;
+    [Header("PC Study (Bedroom)")]
+    [SerializeField] float pcStudyEnergyCost = 10f;
+    [SerializeField] float pcStudySanityCost = 5f;
+    [SerializeField] float pcStudyKnowledgeGain = 6f;
+
+    [Header("Entertain (Bedroom)")]
+    [SerializeField] float entertainEnergyCost = 2f;
+    [SerializeField] float entertainSanityGain = 15f;
+
+    [Header("Sleep")]
+    [SerializeField] float sleepEnergyRestore = 40f;
+    [SerializeField] float sleepSanityRestore = 10f;
 
     [Header("Daily Living Cost")]
     [SerializeField] int dailyLivingCost = 50_000;
@@ -33,13 +46,22 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] TimeManager timeManager;
 
     [Header("UI")]
-    public TextMeshProUGUI gpaText;
+    public TextMeshProUGUI energyText;
+    public TextMeshProUGUI sanityText;
+    public TextMeshProUGUI knowledgeText;
     public TextMeshProUGUI moneyText;
-    public TextMeshProUGUI staminaText;
     public TextMeshProUGUI debtText;
     public TextMeshProUGUI messageText;
 
-    string _shownGpa, _shownMoney, _shownStamina, _shownDebt;
+    bool _breakdownPending;
+    string _shownEnergy, _shownSanity, _shownKnowledge, _shownMoney, _shownDebt;
+
+    public float Knowledge => knowledge;
+    public float Gpa => GameRules.GpaFor(knowledge);
+    public int Money => money;
+    public float Energy => energy;
+    public float Sanity => sanity;
+    public int TotalDebt => totalDebt;
 
     void Awake()
     {
@@ -57,69 +79,107 @@ public class PlayerStats : MonoBehaviour
     {
         if (config == null) return;
 
-        gpa = config.startingGpa;
         money = config.startingMoney;
-        stamina = config.startingStamina;
-        maxStamina = config.maxStamina;
         totalDebt = config.startingDebt;
-        maxGpa = config.maxGpa;
+        energy = config.startingEnergy;
+        maxEnergy = config.maxEnergy;
+        sanity = config.startingSanity;
+        maxSanity = config.maxSanity;
+        knowledge = config.startingKnowledge;
+        maxKnowledge = config.maxKnowledge;
 
-        studyStaminaCost = config.studyStaminaCost;
-        studyGpaGain = config.studyGpaGain;
+        classStudyEnergyCost = config.classStudyEnergyCost;
+        classStudySanityCost = config.classStudySanityCost;
+        classStudyKnowledgeGain = config.classStudyKnowledgeGain;
 
-        workStaminaCost = config.workStaminaCost;
+        workEnergyCost = config.workEnergyCost;
+        workSanityCost = config.workSanityCost;
         workMoneyGain = config.workMoneyGain;
 
-        restStaminaRestore = config.restStaminaRestore;
-        restSetsStaminaToMax = config.restSetsStaminaToMax;
+        pcStudyEnergyCost = config.pcStudyEnergyCost;
+        pcStudySanityCost = config.pcStudySanityCost;
+        pcStudyKnowledgeGain = config.pcStudyKnowledgeGain;
+
+        entertainEnergyCost = config.entertainEnergyCost;
+        entertainSanityGain = config.entertainSanityGain;
+
+        sleepEnergyRestore = config.sleepEnergyRestore;
+        sleepSanityRestore = config.sleepSanityRestore;
 
         dailyLivingCost = config.dailyLivingCost;
     }
 
     public void Study()
     {
-        if (!HasStamina(studyStaminaCost, "study"))
-            return;
+        if (HandleBreakdown()) return;
 
-        stamina -= studyStaminaCost;
-        gpa = Mathf.Min(maxGpa, gpa + studyGpaGain);
-        timeManager?.AdvanceSlot();
-        ShowMessage($"Studied at HUST library. GPA +{studyGpaGain:F1}");
-        UpdateUI();
+        float s0 = sanity;
+        float energyCost = classStudyEnergyCost * GameRules.StressedEnergyMultiplier(s0);
+        if (!HasEnergy(energyCost, "study")) return;
+
+        energy -= energyCost;
+        sanity = Mathf.Max(0f, sanity - classStudySanityCost);
+        float gain = classStudyKnowledgeGain * GameRules.StressedKnowledgeMultiplier(s0);
+        knowledge = Mathf.Min(maxKnowledge, knowledge + gain);
+
+        ShowMessage($"Studied in class. Knowledge +{gain:F0}");
+        FinishActivity();
     }
 
     public void Work()
     {
-        if (!HasStamina(workStaminaCost, "work a cafe shift"))
-            return;
+        if (HandleBreakdown()) return;
 
-        stamina -= workStaminaCost;
+        float energyCost = workEnergyCost * GameRules.StressedEnergyMultiplier(sanity);
+        if (!HasEnergy(energyCost, "work a shift")) return;
+
+        energy -= energyCost;
+        sanity = Mathf.Max(0f, sanity - workSanityCost);
         money += workMoneyGain;
-        timeManager?.AdvanceSlot();
+
         ShowMessage($"Cafe shift done. +{workMoneyGain:N0} VND");
-        UpdateUI();
+        FinishActivity();
+    }
+
+    public void StudyPC()
+    {
+        if (HandleBreakdown()) return;
+
+        float s0 = sanity;
+        float energyCost = pcStudyEnergyCost * GameRules.StressedEnergyMultiplier(s0);
+        if (!HasEnergy(energyCost, "study at the PC")) return;
+
+        energy -= energyCost;
+        sanity = Mathf.Max(0f, sanity - pcStudySanityCost);
+        float gain = pcStudyKnowledgeGain * GameRules.StressedKnowledgeMultiplier(s0);
+        knowledge = Mathf.Min(maxKnowledge, knowledge + gain);
+
+        ShowMessage($"Studied online. Knowledge +{gain:F0}");
+        FinishActivity();
+    }
+
+    public void EntertainPC()
+    {
+        if (HandleBreakdown()) return;
+
+        float energyCost = entertainEnergyCost * GameRules.StressedEnergyMultiplier(sanity);
+        if (!HasEnergy(energyCost, "relax")) return;
+
+        energy -= energyCost;
+        sanity = Mathf.Min(maxSanity, sanity + entertainSanityGain);
+
+        ShowMessage($"Relaxed at the PC. Insanity +{entertainSanityGain:F0}");
+        FinishActivity();
     }
 
     public void Sleep()
     {
-        Rest();
-    }
-
-    public void Rest()
-    {
-        if (restSetsStaminaToMax)
-            stamina = maxStamina;
-        else
-            stamina = Mathf.Min(maxStamina, stamina + restStaminaRestore);
-
-        ShowMessage("Rested at the dorm. Stamina restored.");
-
-        if (timeManager != null && timeManager.CurrentSlot == DaySlot.Evening)
-            timeManager.EndDay();
-        else
-            timeManager?.AdvanceSlot();
-
+        energy = Mathf.Min(maxEnergy, energy + sleepEnergyRestore);
+        sanity = Mathf.Min(maxSanity, sanity + sleepSanityRestore);
+        _breakdownPending = false;
+        ShowMessage("Slept. Energy and sanity partly restored.");
         UpdateUI();
+        timeManager?.EndDay();
     }
 
     public void PayTuition(int amount)
@@ -136,7 +196,7 @@ public class PlayerStats : MonoBehaviour
         UpdateUI();
 
         if (totalDebt <= 0)
-            ShowMessage("You cleared your debt! HUST graduation unlocked!");
+            ShowMessage("Debt cleared! A better ending is in reach.");
     }
 
     public void OnNewDay()
@@ -146,16 +206,38 @@ public class PlayerStats : MonoBehaviour
         money -= dailyLivingCost;
         ShowMessage($"Daily expenses: -{dailyLivingCost:N0} VND");
         UpdateUI();
-
-        if (money < 0)
-            ShowMessage("Warning: You are broke! Work at the cafe or study for scholarships.");
     }
 
-    bool HasStamina(float cost, string actionName)
+    // When a breakdown is pending, the next chosen action is wasted: the slot is
+    // consumed, no stat changes apply, and Sanity recovers to the breakdown floor.
+    bool HandleBreakdown()
     {
-        if (stamina >= cost) return true;
+        if (!_breakdownPending) return false;
 
-        ShowMessage($"Too tired to {actionName}. Need {cost:F0} stamina (have {stamina:F0}). Rest first!");
+        _breakdownPending = false;
+        sanity = Mathf.Min(maxSanity, GameRules.BreakdownRecoverTo);
+        ShowMessage("You broke down from stress. The slot is lost — but you caught your breath.");
+        timeManager?.AdvanceSlot();
+        UpdateUI();
+        return true;
+    }
+
+    void FinishActivity()
+    {
+        if (sanity <= 0f)
+        {
+            sanity = 0f;
+            _breakdownPending = true;
+        }
+        timeManager?.AdvanceSlot();
+        UpdateUI();
+    }
+
+    bool HasEnergy(float cost, string action)
+    {
+        if (energy >= cost) return true;
+
+        ShowMessage($"Too exhausted to {action}. Need {cost:F0} energy (have {energy:F0}).");
         return false;
     }
 
@@ -168,9 +250,10 @@ public class PlayerStats : MonoBehaviour
 
     public void UpdateUI()
     {
-        SetText(gpaText, ref _shownGpa, $"GPA: {gpa:F1} / {maxGpa:F1}");
+        SetText(energyText, ref _shownEnergy, $"Energy: {energy:F0} / {maxEnergy:F0}");
+        SetText(sanityText, ref _shownSanity, $"Insanity: {sanity:F0} / {maxSanity:F0}");
+        SetText(knowledgeText, ref _shownKnowledge, $"Knowledge: {knowledge:F0} / {maxKnowledge:F0}");
         SetText(moneyText, ref _shownMoney, $"Money: {money:N0} VND");
-        SetText(staminaText, ref _shownStamina, $"Stamina: {stamina:F0} / {maxStamina:F0}");
         SetText(debtText, ref _shownDebt, $"Tuition Debt: {totalDebt:N0} VND");
     }
 
@@ -182,9 +265,4 @@ public class PlayerStats : MonoBehaviour
             cache = value;
         }
     }
-
-    public float Gpa => gpa;
-    public int Money => money;
-    public float Stamina => stamina;
-    public int TotalDebt => totalDebt;
 }
