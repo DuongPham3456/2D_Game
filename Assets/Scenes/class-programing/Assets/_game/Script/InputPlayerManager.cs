@@ -85,10 +85,6 @@ public class InputPlayerManager : MonoBehaviour
     //     _playerManager.HandleShootInput(lookDir);
     // }
 
-     int width = Screen.width;
-     int height = Screen.height;
-
-     Vector2 centerScreen = new Vector2(Screen.width / 2, Screen.height / 2);
     //  private void HandleMouse()
     //  {
     //      // 2 cách 

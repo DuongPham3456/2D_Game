@@ -1,65 +1,121 @@
+using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
-using TMPro; 
+using TMPro;
 
 public class Teleport : MonoBehaviour
 {
-    public Transform destination; 
-    public string tenDiaDiem;     
-    public GameObject nutE;       
-    public TMP_Text textMesh;     
+    [System.Serializable]
+    public class Destination
+    {
+        public string name = "Phòng";
+        public Transform point;          // nơi nhân vật dịch chuyển tới
+        public Transform cameraTarget;   // tùy chọn: camera nhảy theo (để 1 màn 1 phòng)
+    }
 
-    private bool isPlayerInZone = false;
-    private GameObject player;
+    [Header("Danh sách điểm đến")]
+    public List<Destination> destinations = new List<Destination>();
+
+    [Header("UI")]
+    public GameObject nutE;             // gợi ý "Bấm E" khi đứng trong vùng
+    public TMP_Text textMesh;           // hiện danh sách điểm đến
+    public string promptMessage = "Bấm E để di chuyển";
+
+    bool inZone;
+    bool menuOpen;
+    GameObject player;
 
     void Start()
     {
-        // 1. Tự động ghép nối chữ
-        if (textMesh != null)
-        {
-            textMesh.text = "Bấm E để tới " + tenDiaDiem;
-        }
-
-        // 2. BẢO HIỂM LỖI: Ép dòng chữ phải tắt đi ngay khi game vừa bật lên!
-        if (nutE != null)
-        {
-            nutE.SetActive(false);
-        }
+        if (nutE != null) nutE.SetActive(false);
+        if (textMesh != null) textMesh.gameObject.SetActive(false);
     }
 
     void Update()
     {
-        if (isPlayerInZone && Input.GetKeyDown(KeyCode.E))
+        if (!inZone) return;
+
+        if (!menuOpen)
         {
-            // Dịch chuyển nhân vật
-            player.transform.position = destination.position;
-            
-            // Xóa chữ đi và reset trạng thái vùng để tránh lỗi
-            isPlayerInZone = false; 
-            if (nutE != null) nutE.SetActive(false);
+            if (Input.GetKeyDown(KeyCode.E)) OpenMenu();
+            return;
+        }
+
+        // Menu đang mở: E hoặc Esc để hủy
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.E))
+        {
+            CloseMenu();
+            return;
+        }
+
+        // Phím số 1..9 -> chọn điểm đến tương ứng (giới hạn 9)
+        int max = Mathf.Min(destinations.Count, 9);
+        for (int i = 0; i < max; i++)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1 + i))
+            {
+                TeleportTo(destinations[i]);
+                CloseMenu();
+                return;
+            }
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OpenMenu()
     {
-        if (other.CompareTag("Player"))
+        menuOpen = true;
+        if (nutE != null) nutE.SetActive(false);
+        if (textMesh == null) return;
+
+        var sb = new StringBuilder("--- Di chuyển ---\n");
+        int max = Mathf.Min(destinations.Count, 9);
+        for (int i = 0; i < max; i++)
+            sb.Append($"[{i + 1}] {destinations[i].name}\n");
+        sb.Append("[Esc] Hủy");
+
+        textMesh.text = sb.ToString();
+        textMesh.gameObject.SetActive(true);
+    }
+
+    void CloseMenu()
+    {
+        menuOpen = false;
+        if (textMesh != null) textMesh.gameObject.SetActive(false);
+        if (nutE != null) nutE.SetActive(inZone);
+    }
+
+    void TeleportTo(Destination d)
+    {
+        if (player == null || d.point == null) return;
+
+        player.transform.position = d.point.position;
+
+        if (d.cameraTarget != null)
         {
-            isPlayerInZone = true;
-            player = other.gameObject;
-            
-            // Hiện chữ lên khi đi vào vùng
-            if (nutE != null) nutE.SetActive(true);
+            var cam = Camera.main;
+            if (cam != null)
+                cam.transform.position = new Vector3(
+                    d.cameraTarget.position.x,
+                    d.cameraTarget.position.y,
+                    cam.transform.position.z);
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
-        {
-            isPlayerInZone = false;
-            player = null;
-            
-            // Tắt chữ đi khi đi ra khỏi vùng
-            if (nutE != null) nutE.SetActive(false);
-        }
+        if (!other.CompareTag("Player")) return;
+
+        inZone = true;
+        player = other.gameObject;
+        if (nutE != null) nutE.SetActive(true);
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (!other.CompareTag("Player")) return;
+
+        inZone = false;
+        player = null;
+        CloseMenu();
     }
 }
