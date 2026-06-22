@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 public class ActionTrigger : MonoBehaviour
 {
-    public enum StationType { Study, Work, Rest, Custom }
+    public enum StationType { Study, Work, PCStudy, Entertain, Sleep, Custom }
 
     [Header("Station")]
     public StationType stationType = StationType.Custom;
@@ -50,7 +50,9 @@ public class ActionTrigger : MonoBehaviour
             {
                 StationType.Study => "Press E to Study",
                 StationType.Work => "Press E to Work at Cafe",
-                StationType.Rest => "Press E to Rest",
+                StationType.PCStudy => "Press E to Study on PC",
+                StationType.Entertain => "Press E to Relax",
+                StationType.Sleep => "Press E to Sleep",
                 _ => promptMessage
             };
             promptText.text = label;
