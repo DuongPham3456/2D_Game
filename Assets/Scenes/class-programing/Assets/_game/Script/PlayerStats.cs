@@ -207,7 +207,19 @@ public class PlayerStats : MonoBehaviour
         ShowMessage($"Daily expenses: -{dailyLivingCost:N0} VND");
         UpdateUI();
     }
-
+// --- HÀM NHẬN SỰ KIỆN NGẪU NHIÊN TỪ TIMEMANAGER ---
+    public void ApplyDailyEvent(int moneyChange, float energyChange, string eventMessage)
+    {
+        // Thay đổi tiền
+        money += moneyChange;
+        
+        // Thay đổi thể lực nhưng chốt cứng không cho vượt quá maxEnergy (100) và không rớt xuống dưới 0
+        energy = Mathf.Clamp(energy + energyChange, 0f, maxEnergy);
+        
+        // Gọi bảng thông báo UI hiện có sẵn của bạn
+        ShowMessage($"[SỰ KIỆN] {eventMessage}");
+        UpdateUI();
+    }
     // When a breakdown is pending, the next chosen action is wasted: the slot is
     // consumed, no stat changes apply, and Sanity recovers to the breakdown floor.
     bool HandleBreakdown()

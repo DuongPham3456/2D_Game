@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ea6f3cc0419c7e04090e8b160c481514
+guid: 9abec63227fde6d489df9c2beb4198ba
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8581048468271170314
-    second: Liu_serve_coffee_0
+      213: 1788998591236336379
+    second: reze_cafe_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,30 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Liu_serve_coffee_0
+      name: reze_cafe_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 16
-        height: 23
+        height: 22
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,20 +115,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6fc7948e1edf9e880800000000000000
-      internalID: -8581048468271170314
+      spriteID: bfae05e7dbcc3d810800000000000000
+      internalID: 1788998591236336379
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Liu_serve_coffee_1
+      name: reze_cafe_1
       rect:
         serializedVersion: 2
         x: 16
         y: 0
         width: 16
-        height: 23
+        height: 22
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -150,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 24e00f9ced671144890ee4c6031c4d64
-      internalID: 1666284300
+      spriteID: 635532ddcb00de24083fc2f3b4896c14
+      internalID: 1290492569
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Liu_serve_coffee_2
+      name: reze_cafe_2
       rect:
         serializedVersion: 2
         x: 32
@@ -172,20 +159,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e8a9cee374c52764a82c20a692689541
-      internalID: 1700469986
+      spriteID: 3481bedc5d526874491a1da764a7ae91
+      internalID: 891801280
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Liu_serve_coffee_3
+      name: reze_cafe_3
       rect:
         serializedVersion: 2
         x: 48
         y: 0
         width: 16
-        height: 23
+        height: 24
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -194,8 +181,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 482fd1a94b03ce24ab463cf1fe0ecdde
-      internalID: 895206045
+      spriteID: 7ad75e6779b05044e9d8ffb5fe4ee0fd
+      internalID: 1356412053
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reze_cafe_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91f5523addf5a01478e36ea83f4658ea
+      internalID: 1130665408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: reze_cafe_5
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 0
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 433e3020985f71a45aa74da17514cb33
+      internalID: -1364776661
       vertices: []
       indices: 
       edges: []
@@ -204,7 +235,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: bfd1453728daf014f850bef45e9ec1c4
+    spriteID: aa003b9a3594ece40a7dd3745fe40f61
     internalID: 0
     vertices: []
     indices: 
@@ -216,10 +247,12 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":16.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Liu_serve_coffee_0: -8581048468271170314
-      Liu_serve_coffee_1: 1666284300
-      Liu_serve_coffee_2: 1700469986
-      Liu_serve_coffee_3: 895206045
+      reze_cafe_0: 1788998591236336379
+      reze_cafe_1: 1290492569
+      reze_cafe_2: 891801280
+      reze_cafe_3: 1356412053
+      reze_cafe_4: 1130665408
+      reze_cafe_5: -1364776661
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

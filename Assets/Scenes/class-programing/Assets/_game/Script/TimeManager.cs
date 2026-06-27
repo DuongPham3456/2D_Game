@@ -3,6 +3,14 @@ using TMPro;
 
 public enum DaySlot { Morning, Afternoon, Evening }
 
+[System.Serializable]
+public class FixedDailyEvent
+{
+    public string eventDescription; 
+    public int moneyChange;         
+    public float energyChange;      
+}
+
 public class TimeManager : MonoBehaviour
 {
     [Header("Time")]
@@ -10,6 +18,10 @@ public class TimeManager : MonoBehaviour
 
     [Header("Semester")]
     public int semesterDays = 10;
+
+    [Header("Daily Fixed Events")]
+    [Tooltip("Điền 10 sự kiện. Element 0 = Ngày 1, Element 1 = Ngày 2...")]
+    public FixedDailyEvent[] morningEvents = new FixedDailyEvent[10];
 
     [Header("UI")]
     public TextMeshProUGUI timeText;
@@ -43,13 +55,12 @@ public class TimeManager : MonoBehaviour
             CurrentSlot = DaySlot.Afternoon;
         else if (CurrentSlot == DaySlot.Afternoon)
             CurrentSlot = DaySlot.Evening;
-        // Evening: intentional no-op — player stays until they Sleep
+        
         UpdateUI();
     }
 
     public void EndDay()
     {
-        // Sleeping on the final day ends the semester instead of starting a new day.
         if (day >= semesterDays)
         {
             endingManager?.ShowEnding();
@@ -58,9 +69,40 @@ public class TimeManager : MonoBehaviour
 
         CurrentSlot = DaySlot.Morning;
         day++;
+        
+        // Trừ tiền sinh hoạt mỗi ngày
         playerStats?.OnNewDay();
+        
+        // Bắn sự kiện ngẫu nhiên
+        TriggerMorningEvent(day);
+
         Debug.Log($"A new day at HUST — Day {day}");
         UpdateUI();
+    }
+
+    void TriggerMorningEvent(int currentDay)
+    {
+        int index = currentDay - 1; 
+
+        if (index >= 0 && index < morningEvents.Length)
+        {
+            FixedDailyEvent evt = morningEvents[index];
+
+            if (!string.IsNullOrEmpty(evt.eventDescription))
+            {
+                Debug.Log($"SỰ KIỆN NGÀY {currentDay}: {evt.eventDescription}");
+
+                if (playerStats != null)
+                {
+                    playerStats.ApplyDailyEvent(evt.moneyChange, evt.energyChange, evt.eventDescription);
+                }
+
+                if (NotificationManager.Instance != null) 
+                {
+                    NotificationManager.Instance.HienThongBao(evt.eventDescription, 4f);
+                }
+            }
+        }
     }
 
     void UpdateUI()
