@@ -16,7 +16,7 @@ MonoBehaviour:
   questionText: "S\u1ED1 n\xE0o l\xE0 s\u1ED1 ch\xEDnh ph\u01B0\u01A1ng?"
   optionA: 24
   optionB: 36
-  optionC: 49
-  correctAnswer: C
+  optionC: 48
+  correctAnswer: B
   hintText: "S\u1ED1 ch\xEDnh ph\u01B0\u01A1ng l\xE0 b\xECnh ph\u01B0\u01A1ng c\u1EE7a
     m\u1ED9t s\u1ED1 nguy\xEAn."
