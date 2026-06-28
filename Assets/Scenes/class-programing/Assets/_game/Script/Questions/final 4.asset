@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: final 4
   m_EditorClassIdentifier: Assembly-CSharp::QuestionData
   type: 2
-  questionText: 
-  optionA: 
-  optionB: 
-  optionC: 
-  correctAnswer: 
-  hintText: 
+  questionText: "T\u1EADp d\u1EEF li\u1EC7u d\xF9ng \u0111\u1EC3 \u0111\xE1nh gi\xE1
+    m\xF4 h\xECnh sau khi hu\u1EA5n luy\u1EC7n g\u1ECDi l\xE0 g\xEC?"
+  optionA: Training Set
+  optionB: Test Set
+  optionC: Validation Set
+  correctAnswer: B
+  hintText: No Hint

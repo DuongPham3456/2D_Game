@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: final 3
   m_EditorClassIdentifier: Assembly-CSharp::QuestionData
   type: 2
-  questionText: 
-  optionA: 
-  optionB: 
-  optionC: 
-  correctAnswer: 
-  hintText: 
+  questionText: "Chu k\u1EF3 dao \u0111\u1ED9ng \u0111i\u1EC1u h\xF2a c\u1EE7a con
+    l\u1EAFc l\xF2 xo ph\u1EE5 thu\u1ED9c v\xE0o y\u1EBFu t\u1ED1:"
+  optionA: "Gia t\u1ED1c tr\u1ECDng tr\u01B0\u1EDDng"
+  optionB: "Kh\u1ED1i l\u01B0\u1EE3ng, \u0111\u1ED9 c\u1EE9ng"
+  optionC: "Bi\xEAn \u0111\u1ED9 dao \u0111\u1ED9ng"
+  correctAnswer: B
+  hintText: No Hint

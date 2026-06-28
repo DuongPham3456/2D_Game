@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: final 8
   m_EditorClassIdentifier: Assembly-CSharp::QuestionData
   type: 2
-  questionText: 
-  optionA: 
-  optionB: 
-  optionC: 
-  correctAnswer: 
-  hintText: 
+  questionText: "Cho hai vect\u01A1 a = (1; 2) v\xE0 b = (2; -1). T\xEDch v\xF4 h\u01B0\u1EDBng
+    a.b b\u1EB1ng:"
+  optionA: 4
+  optionB: 0
+  optionC: -2
+  correctAnswer: B
+  hintText: No Hint

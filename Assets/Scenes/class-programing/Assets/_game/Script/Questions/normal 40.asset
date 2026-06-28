@@ -15,8 +15,8 @@ MonoBehaviour:
   type: 0
   questionText: "K\xFD hi\u1EC7u \"AC\" l\xE0 vi\u1EBFt t\u1EAFt c\u1EE7a lo\u1EA1i
     d\xF2ng \u0111i\u1EC7n n\xE0o?"
-  optionA: "D\xF2ng \u0111i\u1EC7n c\u1EA3m \u1EE9ng"
-  optionB: "D\xF2ng \u0111i\u1EC7n m\u1ED9t chi\u1EC1u"
-  optionC: "D\xF2ng \u0111i\u1EC7n xoay chi\u1EC1u"
+  optionA: "C\u1EA3m \u1EE9ng"
+  optionB: "M\u1ED9t chi\u1EC1u"
+  optionC: "Xoay chi\u1EC1u"
   correctAnswer: C
   hintText: "\u0110\xE2y l\xE0 lo\u1EA1i \u0111i\u1EC7n d\xF9ng trong gia \u0111\xECnh."

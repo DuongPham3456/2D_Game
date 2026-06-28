@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: final 2
   m_EditorClassIdentifier: Assembly-CSharp::QuestionData
   type: 2
-  questionText: 
-  optionA: 
-  optionB: 
-  optionC: 
-  correctAnswer: 
-  hintText: 
+  questionText: "Vect\u01A1 ph\xE1p tuy\u1EBFn c\u1EE7a m\u1EB7t ph\u1EB3ng x - 2y
+    + 3z - 4 = 0 c\xF3 t\u1ECDa \u0111\u1ED9: "
+  optionA: (1; -2; 3)
+  optionB: (-1; 2; -3)
+  optionC: (1; 2; 3)
+  correctAnswer: A
+  hintText: No Hint

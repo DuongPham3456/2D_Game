@@ -13,10 +13,9 @@ MonoBehaviour:
   m_Name: midterm 4
   m_EditorClassIdentifier: Assembly-CSharp::QuestionData
   type: 1
-  questionText: "N\u1EBFu f'(x)=0 t\u1EA1i m\u1ED9t \u0111i\u1EC3m th\xEC \u0111i\u1EC1u
-    g\xEC lu\xF4n \u0111\xFAng?"
-  optionA: "\u0110i\u1EC3m \u0111\xF3 ch\u1EAFc ch\u1EAFn l\xE0 c\u1EF1c \u0111\u1EA1i."
-  optionB: "\u0110i\u1EC3m \u0111\xF3 ch\u1EAFc ch\u1EAFn l\xE0 c\u1EF1c ti\u1EC3u."
-  optionC: "\u0110i\u1EC3m \u0111\xF3 ch\u01B0a ch\u1EAFc l\xE0 c\u1EF1c tr\u1ECB."
+  questionText: "C\u0103n b\u1EADc hai c\u1EE7a 324 b\u1EB1ng bao nhi\xEAu?"
+  optionA: 16
+  optionB: 24
+  optionC: 18
   correctAnswer: C
   hintText: No Hint

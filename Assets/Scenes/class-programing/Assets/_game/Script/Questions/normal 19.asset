@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: normal 19
   m_EditorClassIdentifier: Assembly-CSharp::QuestionData
   type: 0
-  questionText: "\u0110\u1ED9ng v\u1EADt n\xE0o sau \u0111\xE2y thu\u1ED9c nh\xF3m
-    \u0111\u1ED9ng v\u1EADt bi\u1EBFn nhi\u1EC7t (m\xE1u l\u1EA1nh)?"
+  questionText: "\u0110\u1ED9ng v\u1EADt n\xE0o sau \u0111\xE2y kh\xF4ng thu\u1ED9c
+    nh\xF3m \u0111\u1ED9ng v\u1EADt h\u1EB1ng nhi\u1EC7t?"
   optionA: "Th\u1ECF"
   optionB: "C\xE1 s\u1EA5u"
   optionC: "B\u1ED3 c\xE2u"
   correctAnswer: B
-  hintText: "Nhi\u1EC7t \u0111\u1ED9 c\u01A1 th\u1EC3 thay \u0111\u1ED5i theo m\xF4i
-    tr\u01B0\u1EDDng."
+  hintText: "Nhi\u1EC7t \u0111\u1ED9 c\u01A1 th\u1EC3 l\u1EDBp B\xF2 s\xE1t thay
+    \u0111\u1ED5i theo m\xF4i tr\u01B0\u1EDDng. "

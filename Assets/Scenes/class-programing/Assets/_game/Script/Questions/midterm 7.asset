@@ -18,5 +18,5 @@ MonoBehaviour:
   optionA: 300.000 km/s
   optionB: 300.000 m/s
   optionC: 300.000 km/h
-  correctAnswer: 
+  correctAnswer: A
   hintText: No Hint

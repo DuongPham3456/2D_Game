@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: final 9
   m_EditorClassIdentifier: Assembly-CSharp::QuestionData
   type: 2
-  questionText: 
-  optionA: 
-  optionB: 
-  optionC: 
-  correctAnswer: 
-  hintText: 
+  questionText: "Trong ng\xF4n ng\u1EEF C, t\u1EEB kh\xF3a n\xE0o d\xF9ng \u0111\u1EC3
+    khai b\xE1o m\u1ED9t h\u1EB1ng s\u1ED1?"
+  optionA: static
+  optionB: bool
+  optionC: const
+  correctAnswer: C
+  hintText: No Hint

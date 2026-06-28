@@ -36,10 +36,10 @@ public class StudyManager : MonoBehaviour
         // Ẩn quyển vở khi mới vào game
         if (bookPanel != null) bookPanel.SetActive(false);
         
-        // Lắng nghe sự kiện bấm nút đáp án
-        buttonA.onClick.AddListener(() => OnAnswerSelected("A"));
-        buttonB.onClick.AddListener(() => OnAnswerSelected("B"));
-        buttonC.onClick.AddListener(() => OnAnswerSelected("C"));
+        // Đổi cách lắng nghe sự kiện để chạy Coroutine
+        buttonA.onClick.AddListener(() => StartCoroutine(OnAnswerSelected("A")));
+        buttonB.onClick.AddListener(() => StartCoroutine(OnAnswerSelected("B")));
+        buttonC.onClick.AddListener(() => StartCoroutine(OnAnswerSelected("C")));
     }
 
     // Hàm gọi khi tương tác với bàn học
@@ -171,9 +171,9 @@ public class StudyManager : MonoBehaviour
         NextQuestion();
     }
 
-    private void OnAnswerSelected(string choice)
+    private IEnumerator OnAnswerSelected(string choice)
     {
-        if (!isAnswering) return;
+        if (!isAnswering) yield break;
         isAnswering = false;
         
         if (timerCoroutine != null) StopCoroutine(timerCoroutine);
@@ -188,6 +188,18 @@ public class StudyManager : MonoBehaviour
             else if (timeManager.day == 10) knowledgeGain = 25f; 
 
             if (playerStats != null) playerStats.AddKnowledgeFromQuiz(knowledgeGain);
+
+            // [Tùy chọn thêm] Bạn có thể hiện chữ "Chính xác!" nếu muốn, không thì để trống
+            hintTextUI.text = "<color=green><b>CHÍNH XÁC!</b></color>\nBạn được cộng điểm kiến thức.";
+            yield return new WaitForSeconds(1f); // Chờ 1 giây rồi qua câu mới
+        }
+        else
+        {
+            // KHI TRẢ LỜI SAI: Ghi đè chữ vào trang bên phải để thông báo
+            hintTextUI.text = "<color=red><b>Chưa chính xác!</b></color>\nHãy cố gắng hơn nhé!";
+            
+            // Chờ 1.5 giây để người chơi đọc thông báo trước khi nhảy câu
+            yield return new WaitForSeconds(1.5f); 
         }
 
         NextQuestion();

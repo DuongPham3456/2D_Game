@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: final 5
   m_EditorClassIdentifier: Assembly-CSharp::QuestionData
   type: 2
-  questionText: 
-  optionA: 
-  optionB: 
-  optionC: 
-  correctAnswer: 
-  hintText: 
+  questionText: "L\u1EC7nh SQL n\xE0o d\xF9ng \u0111\u1EC3 l\u1EA5y d\u1EEF li\u1EC7u
+    t\u1EEB b\u1EA3ng?"
+  optionA: INSERT
+  optionB: UPDATE
+  optionC: SELECT
+  correctAnswer: C
+  hintText: No Hint

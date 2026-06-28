@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: final 1
   m_EditorClassIdentifier: Assembly-CSharp::QuestionData
   type: 2
-  questionText: 
-  optionA: 
-  optionB: 
-  optionC: 
-  correctAnswer: 
-  hintText: 
+  questionText: "Lo\u1EA1i s\xF3ng \u0111i\u1EC7n t\u1EEB n\xE0o c\xF3 kh\u1EA3 n\u0103ng
+    \u0111\xE2m xuy\xEAn m\u1EA1nh nh\u1EA5t?"
+  optionA: "Tia t\u1EED ngo\u1EA1i"
+  optionB: Tia X
+  optionC: Tia Gamma
+  correctAnswer: C
+  hintText: No Hint
