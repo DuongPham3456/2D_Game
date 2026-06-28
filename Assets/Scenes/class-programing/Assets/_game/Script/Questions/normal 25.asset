@@ -15,8 +15,8 @@ MonoBehaviour:
   type: 0
   questionText: "C\u1EA5u tr\xFAc d\u1EEF li\u1EC7u Ng\u0103n x\u1EBFp (Stack) ho\u1EA1t
     \u0111\u1ED9ng theo c\u01A1 ch\u1EBF n\xE0o?"
-  optionA: LIFO (Last In First Out)
-  optionB: FIFO (First In First Out)
+  optionA: Last In First Out
+  optionB: First In First Out
   optionC: Random
   correctAnswer: A
   hintText: "V\xE0o sau c\xF9ng nh\u01B0ng l\u1EA1i \u0111\u01B0\u1EE3c l\u1EA5y
