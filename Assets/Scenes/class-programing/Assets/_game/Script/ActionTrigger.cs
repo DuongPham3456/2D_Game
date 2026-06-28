@@ -20,10 +20,22 @@ public class ActionTrigger : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && isPlayerInRange)
+        // Nhận phím E từ cả Input cũ lẫn Input System mới
+        bool pressE = Input.GetKeyDown(KeyCode.E);
+        
+        #if ENABLE_INPUT_SYSTEM
+        if (UnityEngine.InputSystem.Keyboard.current != null && UnityEngine.InputSystem.Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            pressE = true;
+        }
+        #endif
+        
+        if (pressE && isPlayerInRange)
+        {
             onInteract.Invoke();
+        }
+        
     }
-
     void OnTriggerEnter2D(Collider2D other)
     {
         if (!other.CompareTag("Player")) return;

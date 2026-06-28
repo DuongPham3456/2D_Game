@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc7d44fe72b03f4b9ee312bca1f6d39, type: 3}
+  m_Name: normal 18
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionData
+  type: 0
+  questionText: "B\u1EC7nh ti\u1EC3u \u0111\u01B0\u1EDDng li\xEAn quan \u0111\u1EBFn
+    s\u1EF1 thi\u1EBFu h\u1EE5t hormone n\xE0o?"
+  optionA: Adrenalin
+  optionB: Insulin
+  optionC: Thyroxin
+  correctAnswer: B
+  hintText: "Do tuy\u1EBFn t\u1EE5y ti\u1EBFt ra \u0111\u1EC3 chuy\u1EC3n h\xF3a
+    \u0111\u01B0\u1EDDng."

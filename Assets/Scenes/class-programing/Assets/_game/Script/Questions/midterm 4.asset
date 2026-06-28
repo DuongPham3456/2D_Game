@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc7d44fe72b03f4b9ee312bca1f6d39, type: 3}
+  m_Name: midterm 4
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionData
+  type: 1
+  questionText: "N\u1EBFu f'(x)=0 t\u1EA1i m\u1ED9t \u0111i\u1EC3m th\xEC \u0111i\u1EC1u
+    g\xEC lu\xF4n \u0111\xFAng?"
+  optionA: "\u0110i\u1EC3m \u0111\xF3 ch\u1EAFc ch\u1EAFn l\xE0 c\u1EF1c \u0111\u1EA1i."
+  optionB: "\u0110i\u1EC3m \u0111\xF3 ch\u1EAFc ch\u1EAFn l\xE0 c\u1EF1c ti\u1EC3u."
+  optionC: "\u0110i\u1EC3m \u0111\xF3 ch\u01B0a ch\u1EAFc l\xE0 c\u1EF1c tr\u1ECB."
+  correctAnswer: C
+  hintText: No Hint

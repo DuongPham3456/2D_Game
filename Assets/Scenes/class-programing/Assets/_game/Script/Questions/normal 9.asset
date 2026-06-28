@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc7d44fe72b03f4b9ee312bca1f6d39, type: 3}
+  m_Name: normal 9
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionData
+  type: 0
+  questionText: "Th\u1EA5u k\xEDnh h\u1ED9i t\u1EE5 th\u01B0\u1EDDng \u0111\u01B0\u1EE3c
+    d\xF9ng \u0111\u1EC3 kh\u1EAFc ph\u1EE5c t\u1EADt kh\xFAc x\u1EA1 n\xE0o c\u1EE7a
+    m\u1EAFt?"
+  optionA: "C\u1EADn th\u1ECB"
+  optionB: "Vi\u1EC5n th\u1ECB"
+  optionC: "Lo\u1EA1n th\u1ECB"
+  correctAnswer: B
+  hintText: "Gi\xFAp nh\xECn r\xF5 c\xE1c v\u1EADt \u1EDF g\u1EA7n h\u01A1n."

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc7d44fe72b03f4b9ee312bca1f6d39, type: 3}
+  m_Name: normal 36
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionData
+  type: 0
+  questionText: "Ai l\xE0 ng\u01B0\u1EDDi c\xF9ng v\u1EDBi Karl Marx s\xE1ng l\u1EADp
+    ch\u1EE7 ngh\u0129a M\xE1c?"
+  optionA: Vladimir Lenin
+  optionB: Charlie Kirk
+  optionC: Friedrich Engels
+  correctAnswer: C
+  hintText: "\xD4ng l\xE0 c\u1ED9ng s\u1EF1 th\xE2n thi\u1EBFt c\u1EE7a Marx trong
+    nhi\u1EC1u t\xE1c ph\u1EA9m."

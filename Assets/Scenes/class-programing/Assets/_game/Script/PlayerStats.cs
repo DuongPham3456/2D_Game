@@ -265,4 +265,22 @@ public class PlayerStats : MonoBehaviour
             cache = value;
         }
     }
+
+    // Hàm này cho phép hệ thống bàn học kiểm tra và trừ thể lực của người chơi
+    public bool ConsumeEnergyForStudy(float amount)
+    {
+        if (energy < amount) return false; // Không đủ thể lực
+        
+        energy -= amount;
+        UpdateUI(); // Cập nhật ngay lên thanh UI Stats
+        return true;
+    }
+
+    // Hàm này dùng để cộng điểm Kiến thức khi trả lời đúng (quy đổi tương ứng GPA)
+    public void AddKnowledgeFromQuiz(float amount)
+    {
+        knowledge = Mathf.Min(maxKnowledge, knowledge + amount);
+        ShowMessage($"Trả lời đúng! Kiến thức +{amount:F0}");
+        UpdateUI(); // Cập nhật ngay lên thanh UI Stats
+    }
 }

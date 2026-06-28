@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc7d44fe72b03f4b9ee312bca1f6d39, type: 3}
+  m_Name: normal 22
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionData
+  type: 0
+  questionText: "Nh\u1EA1c c\u1EE5 ph\xE1t ra \xE2m thanh tr\u1EA7m hay b\u1ED5ng
+    ph\u1EE5 thu\u1ED9c v\xE0o y\u1EBFu t\u1ED1 n\xE0o?"
+  optionA: "Bi\xEAn \u0111\u1ED9 \xE2m"
+  optionB: "T\u1EA7n s\u1ED1 \xE2m"
+  optionC: "Ch\u1EA5t li\u1EC7u"
+  correctAnswer: B
+  hintText: "\u0110\u01B0\u1EE3c \u0111o b\u1EB1ng \u0111\u01A1n v\u1ECB Hz."
