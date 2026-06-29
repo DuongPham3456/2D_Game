@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class PlayerManager : CharacterManager
 {
+    public enum HandState { Empty, HasEmptyCup, HasCoffeeCup }
+
+    [Header("Coffee Minigame")]
+    public HandState myHand = HandState.Empty;
+
     [Header("Player")]
     [SerializeField] PlayerLocomotionManager _playerLocomotionManager;
     [SerializeField] PlayerAnimationManager _playerAnimationManager;

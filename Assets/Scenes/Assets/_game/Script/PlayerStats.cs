@@ -141,6 +141,23 @@ public class PlayerStats : MonoBehaviour
         FinishActivity();
     }
 
+    [Header("Cafe Coffee Minigame")]
+    [SerializeField] float deliverEnergyCost = 4f;
+
+    // One coffee delivered during a shift: stress-scaled energy cost + money.
+    // No slot here — the shift as a whole spends the slot (see CafeShiftManager).
+    public bool DeliverCoffee(int reward)
+    {
+        float cost = deliverEnergyCost * GameRules.StressedEnergyMultiplier(sanity);
+        if (!HasEnergy(cost, "serve coffee")) return false;
+
+        energy -= cost;
+        money += reward;
+        ShowMessage($"Coffee delivered! +{reward:N0} VND");
+        UpdateUI();
+        return true;
+    }
+
     public void StudyPC()
     {
         if (HandleBreakdown()) return;
@@ -205,6 +222,16 @@ public class PlayerStats : MonoBehaviour
 
         money -= dailyLivingCost;
         ShowMessage($"Daily expenses: -{dailyLivingCost:N0} VND");
+        UpdateUI();
+    }
+
+    // Generic scripted/random event: adjust money + energy and show a message.
+    // Bypasses sanity/knowledge and does NOT spend a slot — for daily events & NPCs.
+    public void ApplyDailyEvent(int moneyChange, float energyChange, string eventMessage)
+    {
+        money += moneyChange;
+        energy = Mathf.Clamp(energy + energyChange, 0f, maxEnergy);
+        ShowMessage($"[Event] {eventMessage}");
         UpdateUI();
     }
 
