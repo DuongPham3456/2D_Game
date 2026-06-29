@@ -16,11 +16,6 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] float knowledge = 0f;
     [SerializeField] float maxKnowledge = 200f;
 
-    [Header("Classroom Study")]
-    [SerializeField] float classStudyEnergyCost = 15f;
-    [SerializeField] float classStudySanityCost = 10f;
-    [SerializeField] float classStudyKnowledgeGain = 12f;
-
     [Header("PC Study (Bedroom)")]
     [SerializeField] float pcStudyEnergyCost = 10f;
     [SerializeField] float pcStudySanityCost = 5f;
@@ -83,10 +78,6 @@ public class PlayerStats : MonoBehaviour
         knowledge = config.startingKnowledge;
         maxKnowledge = config.maxKnowledge;
 
-        classStudyEnergyCost = config.classStudyEnergyCost;
-        classStudySanityCost = config.classStudySanityCost;
-        classStudyKnowledgeGain = config.classStudyKnowledgeGain;
-
         pcStudyEnergyCost = config.pcStudyEnergyCost;
         pcStudySanityCost = config.pcStudySanityCost;
         pcStudyKnowledgeGain = config.pcStudyKnowledgeGain;
@@ -98,23 +89,6 @@ public class PlayerStats : MonoBehaviour
         sleepSanityRestore = config.sleepSanityRestore;
 
         dailyLivingCost = config.dailyLivingCost;
-    }
-
-    public void Study()
-    {
-        if (HandleBreakdown()) return;
-
-        float s0 = sanity;
-        float energyCost = classStudyEnergyCost * GameRules.StressedEnergyMultiplier(s0);
-        if (!HasEnergy(energyCost, "study")) return;
-
-        energy -= energyCost;
-        sanity = Mathf.Max(0f, sanity - classStudySanityCost);
-        float gain = classStudyKnowledgeGain * GameRules.StressedKnowledgeMultiplier(s0);
-        knowledge = Mathf.Min(maxKnowledge, knowledge + gain);
-
-        ShowMessage($"Studied in class. Knowledge +{gain:F0}");
-        FinishActivity();
     }
 
     [Header("Cafe Coffee Minigame")]

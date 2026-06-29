@@ -13,10 +13,6 @@ public class StudentGameConfig : ScriptableObject
     public float startingKnowledge = 0f;
     public float maxKnowledge = 200f;
 
-    [Header("Classroom Study")]
-    public float classStudyEnergyCost = 15f;
-    public float classStudySanityCost = 10f;
-    public float classStudyKnowledgeGain = 12f;
 
     [Header("PC Study (Bedroom)")]
     public float pcStudyEnergyCost = 10f;
