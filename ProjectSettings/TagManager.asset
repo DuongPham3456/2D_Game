@@ -42,14 +42,20 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: New Layer 1
+  - name: Floor
     uniqueID: 4039538205
     locked: 0
-  - name: New Layer 2
+  - name: Wall
+    uniqueID: 2072415773
+    locked: 0
+  - name: Collision
     uniqueID: 2288982603
     locked: 0
-  - name: New Layer 3
-    uniqueID: 2072415773
+  - name: Decoration
+    uniqueID: 2088842229
+    locked: 0
+  - name: Player
+    uniqueID: 3525996741
     locked: 0
   m_RenderingLayers:
   - Default

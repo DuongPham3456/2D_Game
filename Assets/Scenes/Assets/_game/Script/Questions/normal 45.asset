@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc7d44fe72b03f4b9ee312bca1f6d39, type: 3}
+  m_Name: normal 45
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionData
+  type: 0
+  questionText: "Tung 1 x\xFAc x\u1EAFc. X\xE1c su\u1EA5t ra s\u1ED1 nguy\xEAn t\u1ED1
+    l\xE0 bao nhi\xEAu?"
+  optionA: 1/6
+  optionB: 1/2
+  optionC: 1/3
+  correctAnswer: B
+  hintText: "\u0110\u1EBFm s\u1ED1 l\u01B0\u1EE3ng c\xE1c s\u1ED1 nguy\xEAn t\u1ED1
+    t\u1EEB 1 \u0111\u1EBFn 6 tr\u01B0\u1EDBc."

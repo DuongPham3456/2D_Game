@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc7d44fe72b03f4b9ee312bca1f6d39, type: 3}
+  m_Name: normal 19
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionData
+  type: 0
+  questionText: "\u0110\u1ED9ng v\u1EADt n\xE0o sau \u0111\xE2y kh\xF4ng thu\u1ED9c
+    nh\xF3m \u0111\u1ED9ng v\u1EADt h\u1EB1ng nhi\u1EC7t?"
+  optionA: "Th\u1ECF"
+  optionB: "C\xE1 s\u1EA5u"
+  optionC: "B\u1ED3 c\xE2u"
+  correctAnswer: B
+  hintText: "Nhi\u1EC7t \u0111\u1ED9 c\u01A1 th\u1EC3 l\u1EDBp B\xF2 s\xE1t thay
+    \u0111\u1ED5i theo m\xF4i tr\u01B0\u1EDDng. "

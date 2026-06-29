@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc7d44fe72b03f4b9ee312bca1f6d39, type: 3}
+  m_Name: normal 26
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionData
+  type: 0
+  questionText: "\u0110\u01A1n v\u1ECB \u0111o l\u1EF1c trong h\u1EC7 SI l\xE0 g\xEC?"
+  optionA: Joule (J)
+  optionB: Newton (N)
+  optionC: Watt (W)
+  correctAnswer: B
+  hintText: "T\xEAn nh\xE0 khoa h\u1ECDc g\u1EAFn v\u1EDBi s\u1EF1 t\xEDch \"tr\xE1i
+    t\xE1o\"."

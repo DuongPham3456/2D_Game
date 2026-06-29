@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc7d44fe72b03f4b9ee312bca1f6d39, type: 3}
+  m_Name: midterm 1
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionData
+  type: 1
+  questionText: "Thu\u1EADt to\xE1n t\xECm ki\u1EBFm n\xE0o ho\u1EA1t \u0111\u1ED9ng
+    hi\u1EC7u qu\u1EA3 tr\xEAn m\u1EA3ng \u0111\xE3 \u0111\u01B0\u1EE3c s\u1EAFp
+    x\u1EBFp?"
+  optionA: Binary Search
+  optionB: Linear Search
+  optionC: Bubble Sort
+  correctAnswer: A
+  hintText: No Hint

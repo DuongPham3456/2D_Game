@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc7d44fe72b03f4b9ee312bca1f6d39, type: 3}
+  m_Name: normal 47
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionData
+  type: 0
+  questionText: "N\u1EBFu b\xE1n k\xEDnh h\xECnh tr\xF2n t\u0103ng g\u1EA5p \u0111\xF4i
+    th\xEC di\u1EC7n t\xEDch t\u0103ng bao nhi\xEAu l\u1EA7n?"
+  optionA: 2
+  optionB: 4
+  optionC: 6
+  correctAnswer: B
+  hintText: "Di\u1EC7n t\xEDch t\u1EC9 l\u1EC7 v\u1EDBi b\xECnh ph\u01B0\u01A1ng
+    b\xE1n k\xEDnh."

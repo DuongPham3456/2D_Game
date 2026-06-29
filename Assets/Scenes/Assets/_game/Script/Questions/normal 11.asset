@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc7d44fe72b03f4b9ee312bca1f6d39, type: 3}
+  m_Name: normal 11
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionData
+  type: 0
+  questionText: "Nguy\xEAn t\u1ED1 h\xF3a h\u1ECDc n\xE0o nh\u1EB9 nh\u1EA5t trong
+    b\u1EA3ng tu\u1EA7n ho\xE0n?"
+  optionA: Helium (He)
+  optionB: Hydrogen (H)
+  optionC: Lithium (Li)
+  correctAnswer: B
+  hintText: "N\u1EB1m \u1EDF \xF4 s\u1ED1 1 trong b\u1EA3ng tu\u1EA7n ho\xE0n."

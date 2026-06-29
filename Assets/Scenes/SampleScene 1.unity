@@ -287,12 +287,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TimeManager
   day: 1
-  hour: 7
-  minute: 0
-  timeSpeed: 10
+  semesterDays: 10
   timeText: {fileID: 662958758}
   dayText: {fileID: 1315910944}
   playerStats: {fileID: 0}
+  endingManager: {fileID: 0}
 --- !u!4 &43754168
 Transform:
   m_ObjectHideFlags: 0
@@ -321,26 +320,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   config: {fileID: 0}
-  gpa: 0
   money: 10000000
-  stamina: 100
-  maxStamina: 100
   totalDebt: 30000000
-  maxGpa: 4
-  studyStaminaCost: 20
-  studyGpaGain: 0.1
-  studyHours: 2
-  workStaminaCost: 30
+  energy: 100
+  maxEnergy: 100
+  sanity: 100
+  maxSanity: 100
+  knowledge: 0
+  maxKnowledge: 200
+  classStudyEnergyCost: 15
+  classStudySanityCost: 10
+  classStudyKnowledgeGain: 12
+  workEnergyCost: 20
+  workSanityCost: 8
   workMoneyGain: 500000
-  workHours: 4
-  restStaminaRestore: 100
-  restHours: 8
-  restSetsStaminaToMax: 1
+  pcStudyEnergyCost: 10
+  pcStudySanityCost: 5
+  pcStudyKnowledgeGain: 6
+  entertainEnergyCost: 2
+  entertainSanityGain: 15
+  sleepEnergyRestore: 40
+  sleepSanityRestore: 10
   dailyLivingCost: 50000
   timeManager: {fileID: 0}
-  gpaText: {fileID: 1130669169}
+  energyText: {fileID: 0}
+  sanityText: {fileID: 0}
+  knowledgeText: {fileID: 0}
   moneyText: {fileID: 17171266}
-  staminaText: {fileID: 1440387855}
   debtText: {fileID: 1782556446}
   messageText: {fileID: 0}
 --- !u!1 &61160183
@@ -530,10 +536,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47b45eb1e940e5f4eb548d3e725a0b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Teleporter
-  destination: {fileID: 974457034}
-  tenDiaDiem: "ph\xF2ng"
+  destinations: []
   nutE: {fileID: 611585153}
   textMesh: {fileID: 611585155}
+  promptMessage: "B\u1EA5m E \u0111\u1EC3 di chuy\u1EC3n"
 --- !u!61 &80765339
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -686,10 +692,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47b45eb1e940e5f4eb548d3e725a0b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Teleporter
-  destination: {fileID: 1488230715}
-  tenDiaDiem: "\u0111i l\xE0m"
+  destinations: []
   nutE: {fileID: 197310393}
   textMesh: {fileID: 197310395}
+  promptMessage: "B\u1EA5m E \u0111\u1EC3 di chuy\u1EC3n"
 --- !u!61 &93618519
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1839,10 +1845,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47b45eb1e940e5f4eb548d3e725a0b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Teleporter
-  destination: {fileID: 640455279}
-  tenDiaDiem: "tr\u01B0\u1EDDng"
+  destinations: []
   nutE: {fileID: 1700339761}
   textMesh: {fileID: 1700339763}
+  promptMessage: "B\u1EA5m E \u0111\u1EC3 di chuy\u1EC3n"
 --- !u!61 &243105247
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3285,6 +3291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerLocomotionManager
   playerTransform: {fileID: 0}
+  rb: {fileID: 0}
   verticalInput: 0
   horizontalInput: 0
   allowToMove: 1
@@ -13164,10 +13171,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47b45eb1e940e5f4eb548d3e725a0b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Teleporter
-  destination: {fileID: 1740935101}
-  tenDiaDiem: "tr\u01B0\u1EDDng"
+  destinations: []
   nutE: {fileID: 1418369756}
   textMesh: {fileID: 1418369758}
+  promptMessage: "B\u1EA5m E \u0111\u1EC3 di chuy\u1EC3n"
 --- !u!61 &639889961
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -15717,10 +15724,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47b45eb1e940e5f4eb548d3e725a0b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Teleporter
-  destination: {fileID: 1536502227}
-  tenDiaDiem: "tr\u01B0\u1EDDng"
+  destinations: []
   nutE: {fileID: 237066933}
   textMesh: {fileID: 237066935}
+  promptMessage: "B\u1EA5m E \u0111\u1EC3 di chuy\u1EC3n"
 --- !u!61 &933899160
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -22861,7 +22868,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1545635498}
   m_Layer: 0
-  m_Name: debt
+  m_Name: bedroom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23698,10 +23705,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47b45eb1e940e5f4eb548d3e725a0b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Teleporter
-  destination: {fileID: 960727284}
-  tenDiaDiem: "h\u1ECDc"
+  destinations: []
   nutE: {fileID: 121668266}
   textMesh: {fileID: 121668268}
+  promptMessage: "B\u1EA5m E \u0111\u1EC3 di chuy\u1EC3n"
 --- !u!61 &1855985076
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -24341,10 +24348,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47b45eb1e940e5f4eb548d3e725a0b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Teleporter
-  destination: {fileID: 1545635498}
-  tenDiaDiem: "tr\u1EA3 n\u1EE3"
+  destinations: []
   nutE: {fileID: 1305839713}
   textMesh: {fileID: 1305839715}
+  promptMessage: "B\u1EA5m E \u0111\u1EC3 di chuy\u1EC3n"
 --- !u!61 &2036029284
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -30387,10 +30394,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47b45eb1e940e5f4eb548d3e725a0b2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Teleporter
-  destination: {fileID: 1301781170}
-  tenDiaDiem: "tr\u01B0\u1EDDng"
+  destinations: []
   nutE: {fileID: 467590649}
   textMesh: {fileID: 467590651}
+  promptMessage: "B\u1EA5m E \u0111\u1EC3 di chuy\u1EC3n"
 --- !u!61 &2124992710
 BoxCollider2D:
   m_ObjectHideFlags: 0

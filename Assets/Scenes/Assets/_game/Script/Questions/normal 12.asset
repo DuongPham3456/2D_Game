@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc7d44fe72b03f4b9ee312bca1f6d39, type: 3}
+  m_Name: normal 12
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionData
+  type: 0
+  questionText: "Kim lo\u1EA1i n\xE0o sau \u0111\xE2y c\xF3 kh\u1EA3 n\u0103ng d\u1EABn
+    \u0111i\u1EC7n t\u1ED1t nh\u1EA5t?"
+  optionA: "B\u1EA1c"
+  optionB: "V\xE0ng"
+  optionC: "\u0110\u1ED3ng"
+  correctAnswer: A
+  hintText: "C\xF3 gi\xE1 th\xE0nh cao n\xEAn kh\xF4ng \u0111\u01B0\u1EE3c d\xF9ng
+    ph\u1ED5 bi\u1EBFn."

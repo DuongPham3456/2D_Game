@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc7d44fe72b03f4b9ee312bca1f6d39, type: 3}
+  m_Name: midterm 8
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionData
+  type: 1
+  questionText: "Cho s\u1ED1 ph\u1EE9c z = 3 - 4i. Ph\u1EA7n \u1EA3o c\u1EE7a s\u1ED1
+    ph\u1EE9c n\xE0y l\xE0 bao nhi\xEAu?"
+  optionA: -4
+  optionB: -4i
+  optionC: 4
+  correctAnswer: A
+  hintText: No Hint

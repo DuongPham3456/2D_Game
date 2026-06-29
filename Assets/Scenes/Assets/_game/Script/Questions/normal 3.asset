@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc7d44fe72b03f4b9ee312bca1f6d39, type: 3}
+  m_Name: normal 3
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionData
+  type: 0
+  questionText: " 1+2+3+...+10 b\u1EB1ng bao nhi\xEAu?"
+  optionA: 45
+  optionB: 50
+  optionC: 55
+  correctAnswer: C
+  hintText: "D\xF9ng c\xF4ng th\u1EE9c: (s\u1ED1 \u0111\u1EA7u + s\u1ED1 cu\u1ED1i)
+    \xD7 s\u1ED1 s\u1ED1 h\u1EA1ng / 2."

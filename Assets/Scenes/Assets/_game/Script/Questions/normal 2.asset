@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc7d44fe72b03f4b9ee312bca1f6d39, type: 3}
+  m_Name: normal 2
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionData
+  type: 0
+  questionText: "L\u1EF1c n\xE0o gi\u1EEF ch\xFAng ta \u0111\u1EE9ng v\u1EEFng tr\xEAn
+    m\u1EB7t \u0111\u1EA5t kh\xF4ng b\u1ECB bay l\xEAn?"
+  optionA: "L\u1EF1c ma s\xE1t"
+  optionB: "L\u1EF1c h\u1EA5p d\u1EABn"
+  optionC: "L\u1EF1c li t\xE2m"
+  correctAnswer: B
+  hintText: "L\u1EF1c n\xE0y do kh\u1ED1i l\u01B0\u1EE3ng kh\u1ED5ng l\u1ED3 c\u1EE7a
+    Tr\xE1i \u0110\u1EA5t t\u1EA1o ra."

@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc7d44fe72b03f4b9ee312bca1f6d39, type: 3}
+  m_Name: final 6
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionData
+  type: 2
+  questionText: "Thi\u1EBFt b\u1ECB n\xE0o d\xF9ng \u0111\u1EC3 bi\u1EBFn \u0111\u1ED5i
+    c\u01A1 n\u0103ng th\xE0nh \u0111i\u1EC7n n\u0103ng?"
+  optionA: "M\xE1y ph\xE1t \u0111i\u1EC7n "
+  optionB: "\u0110\u1ED9ng c\u01A1 \u0111i\u1EC7n "
+  optionC: "T\u1EE5 \u0111i\u1EC7n"
+  correctAnswer: A
+  hintText: No Hint

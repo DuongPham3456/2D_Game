@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc7d44fe72b03f4b9ee312bca1f6d39, type: 3}
+  m_Name: normal 16
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionData
+  type: 0
+  questionText: "Kh\xED n\xE0o chi\u1EBFm ph\u1EA7n tr\u0103m th\u1EC3 t\xEDch l\u1EDBn
+    nh\u1EA5t trong kh\xF4ng kh\xED?"
+  optionA: Oxygen
+  optionB: Nitrogen
+  optionC: Cacbon Dioxide
+  correctAnswer: B
+  hintText: "Chi\u1EBFm kho\u1EA3ng 78% th\u1EC3 t\xEDch b\u1EA7u kh\xED quy\u1EC3n."

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc7d44fe72b03f4b9ee312bca1f6d39, type: 3}
+  m_Name: normal 13
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionData
+  type: 0
+  questionText: "Dung d\u1ECBch n\xE0o c\xF3 \u0111\u1ED9 pH nh\u1ECF h\u01A1n 7?"
+  optionA: "N\u01B0\u1EDBc chanh"
+  optionB: "N\u01B0\u1EDBc v\xF4i trong"
+  optionC: "N\u01B0\u1EDBc c\u1EA5t"
+  correctAnswer: A
+  hintText: "Dung d\u1ECBch n\xE0y mang t\xEDnh axit."
