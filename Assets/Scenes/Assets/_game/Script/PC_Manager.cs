@@ -21,7 +21,13 @@ public class PC_Manager : MonoBehaviour
 
     void OnEnable()
     {
+        UIModal.Open();
         ShowMenu();
+    }
+
+    void OnDisable()
+    {
+        UIModal.Close();
     }
 
     public void ShowMenu()

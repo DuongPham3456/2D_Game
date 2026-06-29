@@ -17,6 +17,7 @@ public class PC_Interact : MonoBehaviour
 
     void Update()
     {
+        if (UIModal.IsOpen) return;
         if (isPlayerNear && Input.GetKeyDown(KeyCode.E))
         {
             if (canvasPC != null) canvasPC.SetActive(true);

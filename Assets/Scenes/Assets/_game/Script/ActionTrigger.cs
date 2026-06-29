@@ -20,6 +20,8 @@ public class ActionTrigger : MonoBehaviour
 
     void Update()
     {
+        if (UIModal.IsOpen) return;   // a panel is up — ignore world interactions
+
         // Nhận phím E từ cả Input cũ lẫn Input System mới
         bool pressE = Input.GetKeyDown(KeyCode.E);
         

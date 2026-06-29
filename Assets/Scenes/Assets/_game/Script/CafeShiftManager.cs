@@ -40,9 +40,18 @@ public class CafeShiftManager : MonoBehaviour
     {
         if (timerText != null) timerText.gameObject.SetActive(true);
 
+        int startDay = timeManager != null ? timeManager.day : 0;
         float remaining = shiftSeconds;
         while (remaining > 0f)
         {
+            // Slept / day changed mid-shift — abandon it without spending a slot.
+            if (timeManager != null && timeManager.day != startDay)
+            {
+                Active = false;
+                if (timerText != null) timerText.gameObject.SetActive(false);
+                yield break;
+            }
+
             if (timerText != null)
             {
                 int m = Mathf.FloorToInt(remaining / 60f);

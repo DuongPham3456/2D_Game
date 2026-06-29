@@ -45,6 +45,10 @@ public class TimeManager : MonoBehaviour
 
     void Start()
     {
+        // Cap the framerate so it stops oscillating (the editor runs uncapped).
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
+
         UpdateUI();
     }
 

@@ -50,9 +50,9 @@ public class StudyManager : MonoBehaviour
         if (bookPanel != null) bookPanel.SetActive(false);
         
         // Đổi cách lắng nghe sự kiện để chạy Coroutine
-        buttonA.onClick.AddListener(() => StartCoroutine(OnAnswerSelected("A")));
-        buttonB.onClick.AddListener(() => StartCoroutine(OnAnswerSelected("B")));
-        buttonC.onClick.AddListener(() => StartCoroutine(OnAnswerSelected("C")));
+        if (buttonA != null) buttonA.onClick.AddListener(() => StartCoroutine(OnAnswerSelected("A")));
+        if (buttonB != null) buttonB.onClick.AddListener(() => StartCoroutine(OnAnswerSelected("B")));
+        if (buttonC != null) buttonC.onClick.AddListener(() => StartCoroutine(OnAnswerSelected("C")));
     }
 
     void ApplyConfigIfPresent()
@@ -69,7 +69,7 @@ public class StudyManager : MonoBehaviour
     // Hàm gọi khi tương tác với bàn học
     public void InteractWithDesk()
     {
-        if (bookPanel.activeSelf) return;
+        if (bookPanel == null || bookPanel.activeSelf) return;
 
         int currentDay = timeManager.day;
         DaySlot currentSlot = timeManager.CurrentSlot;
@@ -104,6 +104,13 @@ public class StudyManager : MonoBehaviour
             }
         }
 
+        // Không có câu hỏi cho hôm nay thì đừng trừ chỉ số (tránh mất lượt vì vở rỗng).
+        if (CountQuestionsForDay(currentDay) == 0)
+        {
+            Debug.Log("Chưa có câu hỏi cho hôm nay.");
+            return;
+        }
+
         // Bắt đầu phiên học: cùng luật với core loop — kiểm tra suy sụp, trừ thể lực
         // (có nhân theo mức stress) và trừ tinh thần. Không đủ điều kiện thì không mở vở.
         float energyCost = (currentDay == 5 || currentDay == 10) ? examEnergyCost : studyEnergyCost;
@@ -121,8 +128,21 @@ public class StudyManager : MonoBehaviour
 
         studyCountToday++;
         bookPanel.SetActive(true);
+        UIModal.Open();
         currentQuestionIndex = 0;
         ShowQuestion(currentQuestionIndex);
+    }
+
+    int CountQuestionsForDay(int day)
+    {
+        if (allQuestions == null) return 0;
+        QuestionType t = day == 5 ? QuestionType.Midterm
+                       : day == 10 ? QuestionType.Final
+                       : QuestionType.Normal;
+        int n = 0;
+        foreach (var q in allQuestions)
+            if (q != null && q.type == t) n++;
+        return n;
     }
 
     private void GenerateSessionQuestions(int day)
@@ -157,16 +177,16 @@ public class StudyManager : MonoBehaviour
         isAnswering = true;
 
         // Đổ chữ vào trang câu hỏi (Bên trái)
-        questionTextUI.text = $"<b>CÂU {index + 1}:</b> {q.questionText}\n\n<b>A.</b> {q.optionA}\n<b>B.</b> {q.optionB}\n<b>C.</b> {q.optionC}";
+        if (questionTextUI != null)
+            questionTextUI.text = $"<b>CÂU {index + 1}:</b> {q.questionText}\n\n<b>A.</b> {q.optionA}\n<b>B.</b> {q.optionB}\n<b>C.</b> {q.optionC}";
 
         // Đổ chữ vào trang gợi ý (Bên phải) - Ngày thi không có hint
-        if (timeManager.day == 5 || timeManager.day == 10)
+        if (hintTextUI != null)
         {
-            hintTextUI.text = "<color=red><b>BÀI KIỂM TRA</b></color>\nKhông có gợi ý cho kỳ thi!";
-        }
-        else
-        {
-            hintTextUI.text = $"<b>GỢI Ý:</b>\n{q.hintText}";
+            if (timeManager.day == 5 || timeManager.day == 10)
+                hintTextUI.text = "<color=red><b>BÀI KIỂM TRA</b></color>\nKhông có gợi ý cho kỳ thi!";
+            else
+                hintTextUI.text = $"<b>GỢI Ý:</b>\n{q.hintText}";
         }
 
         if (timerCoroutine != null) StopCoroutine(timerCoroutine);
@@ -178,12 +198,14 @@ public class StudyManager : MonoBehaviour
         float timeRemaining = duration;
         while (timeRemaining > 0)
         {
-            timerTextUI.text = $"Thời gian: <color=yellow>{Mathf.CeilToInt(timeRemaining)}s</color>";
+            if (timerTextUI != null)
+                timerTextUI.text = $"Thời gian: <color=yellow>{Mathf.CeilToInt(timeRemaining)}s</color>";
             yield return new WaitForSeconds(1f);
             timeRemaining -= 1f;
         }
-        
-        timerTextUI.text = "<color=red>HẾT GIỜ!</color>";
+
+        if (timerTextUI != null)
+            timerTextUI.text = "<color=red>HẾT GIỜ!</color>";
         isAnswering = false;
         yield return new WaitForSeconds(0.8f);
         NextQuestion();
@@ -207,14 +229,15 @@ public class StudyManager : MonoBehaviour
 
             if (playerStats != null) playerStats.AddQuizKnowledge(knowledgeGain);
 
-            // [Tùy chọn thêm] Bạn có thể hiện chữ "Chính xác!" nếu muốn, không thì để trống
-            hintTextUI.text = "<color=green><b>CHÍNH XÁC!</b></color>\nBạn được cộng điểm kiến thức.";
+            if (hintTextUI != null)
+                hintTextUI.text = "<color=green><b>CHÍNH XÁC!</b></color>\nBạn được cộng điểm kiến thức.";
             yield return new WaitForSeconds(1f); // Chờ 1 giây rồi qua câu mới
         }
         else
         {
             // KHI TRẢ LỜI SAI: Ghi đè chữ vào trang bên phải để thông báo
-            hintTextUI.text = "<color=red><b>Chưa chính xác!</b></color>\nHãy cố gắng hơn nhé!";
+            if (hintTextUI != null)
+                hintTextUI.text = "<color=red><b>Chưa chính xác!</b></color>\nHãy cố gắng hơn nhé!";
             
             // Chờ 1.5 giây để người chơi đọc thông báo trước khi nhảy câu
             yield return new WaitForSeconds(1.5f); 
@@ -231,7 +254,8 @@ public class StudyManager : MonoBehaviour
 
     private void EndStudySession()
     {
-        bookPanel.SetActive(false);
+        if (bookPanel != null) bookPanel.SetActive(false);
+        UIModal.Close();
 
         // Suy sụp nếu tinh thần cạn — giống FinishActivity() ở core loop.
         if (playerStats != null) playerStats.EndQuizStudy();

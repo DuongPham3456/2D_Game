@@ -39,6 +39,7 @@ public class Counter : MonoBehaviour
 
     void Update()
     {
+        if (UIModal.IsOpen) return;
         if (isPlayerNearby && player != null && Input.GetKeyDown(KeyCode.C))
             HandleInteraction();
     }

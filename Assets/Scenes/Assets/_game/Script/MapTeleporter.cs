@@ -44,14 +44,17 @@ public class MapTeleporter : MonoBehaviour
 
     public void OpenMap()
     {
-        if (mapPanel == null) return;
+        if (mapPanel == null || mapPanel.activeSelf) return;
         mapPanel.SetActive(true);
+        UIModal.Open();
         Time.timeScale = 0f;   // pause so the player can't walk while choosing
     }
 
     public void CloseMap()
     {
-        if (mapPanel != null) mapPanel.SetActive(false);
+        if (mapPanel == null || !mapPanel.activeSelf) return;
+        mapPanel.SetActive(false);
+        UIModal.Close();
         Time.timeScale = 1f;
     }
 
@@ -81,7 +84,10 @@ public class MapTeleporter : MonoBehaviour
     {
         if (player == null || loc.spawnPoint == null) return;
 
-        player.position = loc.spawnPoint.position;
+        // Move through the Rigidbody2D if there is one, to avoid a 1-frame physics desync.
+        var rb = player.GetComponent<Rigidbody2D>();
+        if (rb != null) rb.position = loc.spawnPoint.position;
+        else player.position = loc.spawnPoint.position;
 
         if (loc.cameraTarget != null)
         {

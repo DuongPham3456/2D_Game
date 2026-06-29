@@ -18,7 +18,7 @@ public class NPC_KhachQuytTien : MonoBehaviour
 
     void Update()
     {
-        if (isPlayerNear && !isRunningAway && Input.GetKeyDown(interactKey))
+        if (!UIModal.IsOpen && isPlayerNear && !isRunningAway && Input.GetKeyDown(interactKey))
         {
             NotificationManager.Instance?.Show("The customer dined and dashed!", 4f);
             FindFirstObjectByType<PlayerStats>()?.ApplyDailyEvent(0, -energyPenalty, "Dine-and-dash at the cafe");
