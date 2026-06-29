@@ -8,7 +8,7 @@ public class Counter : MonoBehaviour
     public enum CounterType { CupDispenser, CoffeeMachine, Delivery }
     public CounterType type;
 
-    [SerializeField] int deliveryReward = 30000;
+    [SerializeField] int deliveryReward = 15000;   // ~20 cups in a 5-min shift = ~300k
     [SerializeField] float brewSeconds = 3f;
 
     PlayerStats stats;

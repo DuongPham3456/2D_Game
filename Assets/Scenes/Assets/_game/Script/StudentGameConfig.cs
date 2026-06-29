@@ -4,8 +4,8 @@ using UnityEngine;
 public class StudentGameConfig : ScriptableObject
 {
     [Header("Starting Stats")]
-    public int startingMoney = 5_000_000;
-    public int startingDebt = 30_000_000;
+    public int startingMoney = 200_000;
+    public int startingDebt = 3_000_000;
     public float startingEnergy = 100f;
     public float maxEnergy = 100f;
     public float startingSanity = 100f;
@@ -17,11 +17,6 @@ public class StudentGameConfig : ScriptableObject
     public float classStudyEnergyCost = 15f;
     public float classStudySanityCost = 10f;
     public float classStudyKnowledgeGain = 12f;
-
-    [Header("Work (Cafe) — flat pay until mini-game ships")]
-    public float workEnergyCost = 20f;
-    public float workSanityCost = 8f;
-    public int workMoneyGain = 500_000;
 
     [Header("PC Study (Bedroom)")]
     public float pcStudyEnergyCost = 10f;
@@ -37,7 +32,7 @@ public class StudentGameConfig : ScriptableObject
     public float sleepSanityRestore = 10f;
 
     [Header("Daily Living Cost")]
-    public int dailyLivingCost = 50_000;
+    public int dailyLivingCost = 100_000;
 
     [Header("Quiz Study (Desk) — costs scale with stress like classroom study")]
     public float quizStudyEnergyCost = 20f;

@@ -7,8 +7,8 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] StudentGameConfig config;
 
     [Header("Stats")]
-    [SerializeField] int money = 5_000_000;
-    [SerializeField] int totalDebt = 30_000_000;
+    [SerializeField] int money = 200_000;
+    [SerializeField] int totalDebt = 3_000_000;
     [SerializeField] float energy = 100f;
     [SerializeField] float maxEnergy = 100f;
     [SerializeField] float sanity = 100f;
@@ -20,11 +20,6 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] float classStudyEnergyCost = 15f;
     [SerializeField] float classStudySanityCost = 10f;
     [SerializeField] float classStudyKnowledgeGain = 12f;
-
-    [Header("Work (Cafe)")]
-    [SerializeField] float workEnergyCost = 20f;
-    [SerializeField] float workSanityCost = 8f;
-    [SerializeField] int workMoneyGain = 500_000;
 
     [Header("PC Study (Bedroom)")]
     [SerializeField] float pcStudyEnergyCost = 10f;
@@ -40,7 +35,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] float sleepSanityRestore = 10f;
 
     [Header("Daily Living Cost")]
-    [SerializeField] int dailyLivingCost = 50_000;
+    [SerializeField] int dailyLivingCost = 100_000;
 
     [Header("References")]
     [SerializeField] TimeManager timeManager;
@@ -92,10 +87,6 @@ public class PlayerStats : MonoBehaviour
         classStudySanityCost = config.classStudySanityCost;
         classStudyKnowledgeGain = config.classStudyKnowledgeGain;
 
-        workEnergyCost = config.workEnergyCost;
-        workSanityCost = config.workSanityCost;
-        workMoneyGain = config.workMoneyGain;
-
         pcStudyEnergyCost = config.pcStudyEnergyCost;
         pcStudySanityCost = config.pcStudySanityCost;
         pcStudyKnowledgeGain = config.pcStudyKnowledgeGain;
@@ -126,23 +117,8 @@ public class PlayerStats : MonoBehaviour
         FinishActivity();
     }
 
-    public void Work()
-    {
-        if (HandleBreakdown()) return;
-
-        float energyCost = workEnergyCost * GameRules.StressedEnergyMultiplier(sanity);
-        if (!HasEnergy(energyCost, "work a shift")) return;
-
-        energy -= energyCost;
-        sanity = Mathf.Max(0f, sanity - workSanityCost);
-        money += workMoneyGain;
-
-        ShowMessage($"Cafe shift done. +{workMoneyGain:N0} VND");
-        FinishActivity();
-    }
-
     [Header("Cafe Coffee Minigame")]
-    [SerializeField] float deliverEnergyCost = 4f;
+    [SerializeField] float deliverEnergyCost = 1f;
 
     // One coffee delivered during a shift: stress-scaled energy cost + money.
     // No slot here — the shift as a whole spends the slot (see CafeShiftManager).
@@ -154,6 +130,28 @@ public class PlayerStats : MonoBehaviour
         energy -= cost;
         money += reward;
         ShowMessage($"Coffee delivered! +{reward:N0} VND");
+        UpdateUI();
+        return true;
+    }
+
+    // Buy food / an energy drink: money -> energy, capped at max. No time slot.
+    // Returns false if already full or too broke.
+    public bool BuyEnergy(int cost, float energyGain, string itemName)
+    {
+        if (energy >= maxEnergy)
+        {
+            ShowMessage("Năng lượng đã đầy.");
+            return false;
+        }
+        if (money < cost)
+        {
+            ShowMessage($"Không đủ tiền mua {itemName} ({cost:N0} VND).");
+            return false;
+        }
+
+        money -= cost;
+        energy = Mathf.Min(maxEnergy, energy + energyGain);
+        ShowMessage($"{itemName}: +{energyGain:F0} năng lượng, -{cost:N0} VND");
         UpdateUI();
         return true;
     }
