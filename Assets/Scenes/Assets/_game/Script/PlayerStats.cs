@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class PlayerStats : MonoBehaviour
@@ -42,6 +43,11 @@ public class PlayerStats : MonoBehaviour
     public TextMeshProUGUI moneyText;
     public TextMeshProUGUI debtText;
     public TextMeshProUGUI messageText;
+
+    [Header("UI Bars (Image, Type = Filled)")]
+    public Image energyBar;
+    public Image sanityBar;
+    public Image knowledgeBar;
 
     bool _breakdownPending;
     string _shownEnergy, _shownSanity, _shownKnowledge, _shownMoney, _shownDebt;
@@ -264,6 +270,15 @@ public class PlayerStats : MonoBehaviour
         SetText(knowledgeText, ref _shownKnowledge, $"Knowledge: {knowledge:F0} / {maxKnowledge:F0}");
         SetText(moneyText, ref _shownMoney, $"Money: {money:N0} VND");
         SetText(debtText, ref _shownDebt, $"Tuition Debt: {totalDebt:N0} VND");
+
+        SetBar(energyBar, energy, maxEnergy);
+        SetBar(sanityBar, sanity, maxSanity);
+        SetBar(knowledgeBar, knowledge, maxKnowledge);
+    }
+
+    void SetBar(Image bar, float value, float max)
+    {
+        if (bar != null) bar.fillAmount = max > 0f ? Mathf.Clamp01(value / max) : 0f;
     }
 
     void SetText(TextMeshProUGUI field, ref string cache, string value)

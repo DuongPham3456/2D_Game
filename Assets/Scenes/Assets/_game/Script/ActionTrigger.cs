@@ -24,6 +24,11 @@ public class ActionTrigger : MonoBehaviour
     bool isPlayerInRange;
     bool hiddenByModal;
 
+    void Start()
+    {
+        ShowPrompt(false);   // ẩn cho tới khi người chơi lại gần collider
+    }
+
     void Update()
     {
         // A panel (sleep / book / PC menu) is up: ignore input AND hide the prompt
