@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: e4bbf85011b1fb449be29fdc4872220c
+  - enabled: 1
+    path: Assets/Scenes/StudyMechanic.unity
+    guid: 8ee0094db9b3d3a4f8456d5d7dcc92f9
+  m_configObjects:
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: c4603571a91d3394b9dfcf8a411d1f72, type: 3}
+  m_UseUCBPForAssetBundles: 0

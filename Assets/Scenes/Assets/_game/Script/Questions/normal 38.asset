@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc7d44fe72b03f4b9ee312bca1f6d39, type: 3}
+  m_Name: normal 38
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionData
+  type: 0
+  questionText: "\u0110\u1EA1i h\u1ECDc B\xE1ch khoa H\xE0 N\u1ED9i \u0111\u01B0\u1EE3c
+    th\xE0nh l\u1EADp v\xE0o n\u0103m n\xE0o?"
+  optionA: 1956
+  optionB: 1965
+  optionC: 1955
+  correctAnswer: A
+  hintText: "Th\xE0nh l\u1EADp sau khi mi\u1EC1n B\u1EAFc b\u01B0\u1EDBc v\xE0o th\u1EDDi
+    k\u1EF3 x\xE2y d\u1EF1ng \u0111\u1EA5t n\u01B0\u1EDBc. "

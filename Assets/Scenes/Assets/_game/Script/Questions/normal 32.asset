@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc7d44fe72b03f4b9ee312bca1f6d39, type: 3}
+  m_Name: normal 32
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionData
+  type: 0
+  questionText: "C\u1EA7u v\u1ED3ng xu\u1EA5t hi\u1EC7n l\xE0 do hi\u1EC7n t\u01B0\u1EE3ng
+    g\xEC c\u1EE7a \xE1nh s\xE1ng?"
+  optionA: "Kh\xFAc x\u1EA1"
+  optionB: "Ph\u1EA3n x\u1EA1 to\xE0n ph\u1EA7n"
+  optionC: "T\xE1n s\u1EAFc"
+  correctAnswer: C
+  hintText: "\xC1nh s\xE1ng tr\u1EAFng b\u1ECB t\xE1ch th\xE0nh 7 m\xE0u qua gi\u1ECDt
+    n\u01B0\u1EDBc."

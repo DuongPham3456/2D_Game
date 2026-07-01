@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc7d44fe72b03f4b9ee312bca1f6d39, type: 3}
+  m_Name: final 2
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionData
+  type: 2
+  questionText: "Vect\u01A1 ph\xE1p tuy\u1EBFn c\u1EE7a m\u1EB7t ph\u1EB3ng x - 2y
+    + 3z - 4 = 0 c\xF3 t\u1ECDa \u0111\u1ED9: "
+  optionA: (1; -2; 3)
+  optionB: (-1; 2; -3)
+  optionC: (1; 2; 3)
+  correctAnswer: A
+  hintText: No Hint

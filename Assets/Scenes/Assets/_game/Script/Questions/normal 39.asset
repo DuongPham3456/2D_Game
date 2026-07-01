@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dc7d44fe72b03f4b9ee312bca1f6d39, type: 3}
+  m_Name: normal 39
+  m_EditorClassIdentifier: Assembly-CSharp::QuestionData
+  type: 0
+  questionText: "L\u1EA7n th\u1EE9 3 ch\u1EE7 t\u1ECBch H\u1ED3 Ch\xED Minh \u0111\u1EBFn
+    th\u0103m tr\u01B0\u1EDDng \u0110HBK l\xE0 n\u0103m: "
+  optionA: 1958
+  optionB: 1962
+  optionC: 1964
+  correctAnswer: B
+  hintText: "Sau 6 n\u0103m th\xE0nh l\u1EADp tr\u01B0\u1EDDng. "
