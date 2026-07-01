@@ -171,6 +171,16 @@ public class PlayerStats : MonoBehaviour
         timeManager?.EndDay();
     }
 
+    // Daytime nap at the bed: fully recharge energy and spend one slot — the day
+    // continues (unlike Sleep, which ends it). Matches the old bed nap behavior.
+    public void Nap()
+    {
+        energy = maxEnergy;
+        ShowMessage("Ngủ một giấc nạp đầy năng lượng!");
+        UpdateUI();
+        timeManager?.AdvanceSlot();
+    }
+
     public void PayTuition(int amount)
     {
         if (money < amount)

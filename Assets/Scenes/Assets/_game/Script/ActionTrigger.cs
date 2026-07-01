@@ -22,10 +22,22 @@ public class ActionTrigger : MonoBehaviour
     public GameObject promptObject;   // e.g. a floating "E" icon, toggled with the prompt
 
     bool isPlayerInRange;
+    bool hiddenByModal;
 
     void Update()
     {
-        if (UIModal.IsOpen) return;   // a panel is up — ignore world interactions
+        // A panel (sleep / book / PC menu) is up: ignore input AND hide the prompt
+        // so it doesn't linger over the player. Restore it when the panel closes.
+        if (UIModal.IsOpen)
+        {
+            if (isPlayerInRange && !hiddenByModal) { ShowPrompt(false); hiddenByModal = true; }
+            return;
+        }
+        if (hiddenByModal)
+        {
+            if (isPlayerInRange) ShowPrompt(true);
+            hiddenByModal = false;
+        }
 
         // Nhận phím E từ cả Input cũ lẫn Input System mới
         bool pressE = Input.GetKeyDown(KeyCode.E);
