@@ -31,8 +31,13 @@ public class CafeShiftManager : MonoBehaviour
     // Wire a cafe ActionTrigger's onInteract to this.
     public void StartShift()
     {
-        if (Active) return;
+        if (Active)
+        {
+            Debug.Log("[Cafe] Already on a shift — can't clock in again.");
+            return;
+        }
         Active = true;
+        Debug.Log($"[Cafe] Clocked in! Shift started ({FormatTime(shiftSeconds)}). Press C at the counters to make coffee.");
         StartCoroutine(ShiftRoutine());
     }
 
@@ -42,6 +47,7 @@ public class CafeShiftManager : MonoBehaviour
 
         int startDay = timeManager != null ? timeManager.day : 0;
         float remaining = shiftSeconds;
+        int lastLoggedSecond = -1;
         while (remaining > 0f)
         {
             // Slept / day changed mid-shift — abandon it without spending a slot.
@@ -49,15 +55,20 @@ public class CafeShiftManager : MonoBehaviour
             {
                 Active = false;
                 if (timerText != null) timerText.gameObject.SetActive(false);
+                Debug.Log("[Cafe] Shift abandoned (day changed) — no time slot spent.");
                 yield break;
             }
 
-            if (timerText != null)
+            int sec = Mathf.CeilToInt(remaining);
+            if (timerText != null) timerText.text = $"Shift: {FormatTime(sec)}";
+
+            // Console fallback while there's no HUD: log each minute mark + final 10s.
+            if (sec != lastLoggedSecond && (sec % 60 == 0 || sec <= 10))
             {
-                int m = Mathf.FloorToInt(remaining / 60f);
-                int s = Mathf.FloorToInt(remaining % 60f);
-                timerText.text = $"Shift: {m}:{s:00}";
+                Debug.Log($"[Cafe] Time left: {FormatTime(sec)}");
+                lastLoggedSecond = sec;
             }
+
             remaining -= Time.deltaTime;
             yield return null;
         }
@@ -69,6 +80,13 @@ public class CafeShiftManager : MonoBehaviour
     {
         Active = false;
         if (timerText != null) timerText.gameObject.SetActive(false);
+        Debug.Log("[Cafe] Shift over — pay collected. Time slot advanced.");
         timeManager?.AdvanceSlot();   // the shift spends one slot
+    }
+
+    static string FormatTime(float seconds)
+    {
+        int total = Mathf.Max(0, Mathf.CeilToInt(seconds));
+        return $"{total / 60}:{total % 60:00}";
     }
 }
