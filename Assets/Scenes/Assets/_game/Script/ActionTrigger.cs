@@ -23,6 +23,13 @@ public class ActionTrigger : MonoBehaviour
 
     bool isPlayerInRange;
     bool hiddenByModal;
+    bool hiddenByShift;
+    CafeShiftManager cafeShiftManager;
+
+    void Awake()
+    {
+        cafeShiftManager = FindFirstObjectByType<CafeShiftManager>();
+    }
 
     void Start()
     {
@@ -40,8 +47,23 @@ public class ActionTrigger : MonoBehaviour
         }
         if (hiddenByModal)
         {
-            if (isPlayerInRange) ShowPrompt(true);
+            if (isPlayerInRange && !(cafeShiftManager != null && cafeShiftManager.Active && stationType == StationType.Work))
+                ShowPrompt(true);
             hiddenByModal = false;
+        }
+
+        if (isPlayerInRange && cafeShiftManager != null && cafeShiftManager.Active && stationType == StationType.Work)
+        {
+            if (!hiddenByShift)
+            {
+                ShowPrompt(false);
+                hiddenByShift = true;
+            }
+        }
+        else if (hiddenByShift)
+        {
+            if (isPlayerInRange) ShowPrompt(true);
+            hiddenByShift = false;
         }
 
         // Nhận phím E từ cả Input cũ lẫn Input System mới
@@ -58,6 +80,12 @@ public class ActionTrigger : MonoBehaviour
         {
             onInteract.Invoke();
             Interacted?.Invoke();
+
+            if (cafeShiftManager != null && cafeShiftManager.Active && stationType == StationType.Work)
+            {
+                ShowPrompt(false);
+                hiddenByShift = true;
+            }
         }
 
     }
@@ -87,7 +115,7 @@ public class ActionTrigger : MonoBehaviour
             string label = stationType switch
             {
                 StationType.Study => "Press E to Study",
-                StationType.Work => "Press E to Work at Cafe",
+                StationType.Work => "Press E to check-in and start making coffee",
                 StationType.PCStudy => "Press E to Study on PC",
                 StationType.Entertain => "Press E to Relax",
                 StationType.Sleep => "Press E to Sleep",
