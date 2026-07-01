@@ -44,10 +44,13 @@ public class PlayerStats : MonoBehaviour
     public TextMeshProUGUI debtText;
     public TextMeshProUGUI messageText;
 
-    [Header("UI Bars (Image, Type = Filled)")]
+    [Header("UI Bars (Image + frames, element 0 = empty ... last = full)")]
     public Image energyBar;
+    public Sprite[] energyFrames;
     public Image sanityBar;
+    public Sprite[] sanityFrames;
     public Image knowledgeBar;
+    public Sprite[] knowledgeFrames;
 
     bool _breakdownPending;
     string _shownEnergy, _shownSanity, _shownKnowledge, _shownMoney, _shownDebt;
@@ -271,14 +274,18 @@ public class PlayerStats : MonoBehaviour
         SetText(moneyText, ref _shownMoney, $"Money: {money:N0} VND");
         SetText(debtText, ref _shownDebt, $"Tuition Debt: {totalDebt:N0} VND");
 
-        SetBar(energyBar, energy, maxEnergy);
-        SetBar(sanityBar, sanity, maxSanity);
-        SetBar(knowledgeBar, knowledge, maxKnowledge);
+        SetBar(energyBar, energyFrames, energy, maxEnergy);
+        SetBar(sanityBar, sanityFrames, sanity, maxSanity);
+        SetBar(knowledgeBar, knowledgeFrames, knowledge, maxKnowledge);
     }
 
-    void SetBar(Image bar, float value, float max)
+    // Pick the frame matching this stat's fill (0 = empty ... last = full).
+    void SetBar(Image bar, Sprite[] frames, float value, float max)
     {
-        if (bar != null) bar.fillAmount = max > 0f ? Mathf.Clamp01(value / max) : 0f;
+        if (bar == null || frames == null || frames.Length == 0) return;
+        float fraction = max > 0f ? Mathf.Clamp01(value / max) : 0f;
+        int i = Mathf.RoundToInt(fraction * (frames.Length - 1));
+        bar.sprite = frames[i];
     }
 
     void SetText(TextMeshProUGUI field, ref string cache, string value)

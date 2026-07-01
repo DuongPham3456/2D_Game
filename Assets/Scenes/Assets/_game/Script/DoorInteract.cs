@@ -6,8 +6,10 @@ using UnityEngine;
 public class DoorInteract : MonoBehaviour
 {
     [Header("Âm thanh")]
-    public AudioSource doorSound;
+    [Tooltip("Kéo thẳng file âm thanh vào đây.")]
+    public AudioClip doorClip;
 
+    private AudioSource doorSource;
     private SpriteRenderer doorSprite;
     private bool isDoorOpen = false;
 
@@ -20,12 +22,17 @@ public class DoorInteract : MonoBehaviour
     void Start()
     {
         doorSprite = GetComponent<SpriteRenderer>();
+
+        // Tự tạo AudioSource để chỉ cần gán AudioClip trong Inspector.
+        doorSource = GetComponent<AudioSource>();
+        if (doorSource == null) doorSource = gameObject.AddComponent<AudioSource>();
+        doorSource.playOnAwake = false;
     }
 
     void Toggle()
     {
         isDoorOpen = !isDoorOpen;
-        if (doorSound != null) doorSound.Play();
+        if (doorClip != null) doorSource.PlayOneShot(doorClip);
         // Tàng hình khi mở để đi qua, hiện lại khi đóng
         if (doorSprite != null) doorSprite.enabled = !isDoorOpen;
         Debug.Log(isDoorOpen ? "Cửa đã MỞ!" : "Cửa đã ĐÓNG!");

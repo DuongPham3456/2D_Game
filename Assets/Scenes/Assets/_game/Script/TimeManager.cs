@@ -25,6 +25,7 @@ public class TimeManager : MonoBehaviour
     [Header("UI")]
     public TextMeshProUGUI timeText;
     public TextMeshProUGUI dayText;
+    public TextMeshProUGUI dayTimeText;   // optional combined label: "Day 3 – Morning"
 
     [Header("References")]
     [SerializeField] PlayerStats playerStats;
@@ -107,5 +108,8 @@ public class TimeManager : MonoBehaviour
             dayText.text = $"Day {day}";
             _shownDay = day;
         }
+
+        if (dayTimeText != null)
+            dayTimeText.text = $"Day: {day} - {CurrentSlot}";
     }
 }
