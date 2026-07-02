@@ -271,8 +271,8 @@ public class PlayerStats : MonoBehaviour
         SetText(energyText, ref _shownEnergy, $"Energy: {energy:F0} / {maxEnergy:F0}");
         SetText(sanityText, ref _shownSanity, $"Insanity: {sanity:F0} / {maxSanity:F0}");
         SetText(knowledgeText, ref _shownKnowledge, $"Knowledge: {knowledge:F0} / {maxKnowledge:F0}");
-        SetText(moneyText, ref _shownMoney, $"Money: {money:N0} VND");
-        SetText(debtText, ref _shownDebt, $"Tuition Debt: {totalDebt:N0} VND");
+        SetText(moneyText, ref _shownMoney, $"{money:N0}");
+        SetText(debtText, ref _shownDebt, $"Debt: {totalDebt:N0}");
 
         SetBar(energyBar, energyFrames, energy, maxEnergy);
         SetBar(sanityBar, sanityFrames, sanity, maxSanity);

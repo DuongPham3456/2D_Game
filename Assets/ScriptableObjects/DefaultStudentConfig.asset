@@ -11,20 +11,26 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a3f8c2e1d4b5678901234abcdef56789, type: 3}
   m_Name: DefaultStudentConfig
-  startingGpa: 2
-  startingMoney: 5000000
-  startingStamina: 100
-  maxStamina: 100
-  startingDebt: 30000000
-  maxGpa: 4
-  studyStaminaCost: 20
-  studyGpaGain: 0.1
-  studyHours: 2
-  workStaminaCost: 30
-  workMoneyGain: 500000
-  workHours: 4
-  restStaminaRestore: 100
-  restHours: 8
-  restSetsStaminaToMax: 1
+  m_EditorClassIdentifier: 
+  startingMoney: 200000
+  startingDebt: 3000000
+  startingEnergy: 100
+  maxEnergy: 100
+  startingSanity: 100
+  maxSanity: 100
+  startingKnowledge: 0
+  maxKnowledge: 200
+  pcStudyEnergyCost: 10
+  pcStudySanityCost: 5
+  pcStudyKnowledgeGain: 6
+  entertainEnergyCost: 2
+  entertainSanityGain: 15
+  sleepEnergyRestore: 40
+  sleepSanityRestore: 10
   dailyLivingCost: 50000
-  chargeLivingCostAtEndOfDay: 1
+  quizStudyEnergyCost: 20
+  quizExamEnergyCost: 40
+  quizStudySanityCost: 8
+  quizNormalKnowledgeGain: 5
+  quizMidtermKnowledgeGain: 15
+  quizFinalKnowledgeGain: 25
